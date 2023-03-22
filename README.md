@@ -16,8 +16,8 @@ If you have questions about or suggestions for this code, please contact Aaron M
 This code assumes you have access using a GPU enabled for CUDA 11.3. Other CUDA versions should work as long as the `torch` and `transformers` versions are sufficiently up-to-date.
 
 ```bash
-git clone https://github.com/bigscience-workshop/lm-evaluation-harness
-cd lm-evaluation-harness
+git clone https://github.com/babylm/evaluation-pipeline
+cd evaluation-pipeline
 pip install -e ".[dev]"
 pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 promptsource==0.2.3 --extra-index-url https://download.pytorch.org/whl/cu113
 ```
