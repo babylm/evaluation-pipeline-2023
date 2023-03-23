@@ -19,7 +19,7 @@ This code assumes you have access using a GPU enabled for CUDA 11.3. Other CUDA 
 git clone https://github.com/babylm/evaluation-pipeline
 cd evaluation-pipeline
 pip install -e ".[dev]"
-pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 promptsource==0.2.3 --extra-index-url https://download.pytorch.org/whl/cu113
+pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
 ```
 
 ### Data
