@@ -9,7 +9,7 @@ We provide support for zero-shot evaluations on BLiMP, as well as scripts for fi
 
 We also provide a [Colab demo](https://colab.research.google.com/drive/1HX2D3wztO81tKcqCeV_ecRcEUseBVuTc?usp=sharing) of the evaluation pipeline as a demonstration of how to use the code.
 
-If you have questions about or suggestions for this code, please contact Aaron Mueller. We also welcome pull requests!
+If you have questions about or suggestions for this code, please open an issue and consider [joining our Slack](https://join.slack.com/t/babylmchallenge/shared_invite/zt-1s8el4mro-qvVO447l3POBZcUNvMWQcg). We also welcome pull requests!
 
 ## Installation
 
