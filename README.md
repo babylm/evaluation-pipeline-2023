@@ -9,11 +9,11 @@ We provide support for zero-shot evaluations on BLiMP, as well as scripts for fi
 
 We also provide a [Colab demo](https://colab.research.google.com/drive/1HX2D3wztO81tKcqCeV_ecRcEUseBVuTc?usp=sharing) of the evaluation pipeline as a demonstration of how to use the code.
 
-If you have questions about or suggestions for this code, please contact Aaron Mueller. We also welcome pull requests!
+If you have questions about or suggestions for this code, please open an issue and consider [joining our Slack](https://join.slack.com/t/babylmchallenge/shared_invite/zt-1s8el4mro-qvVO447l3POBZcUNvMWQcg). We also welcome pull requests!
 
 ## Installation
 
-This code assumes you have access using a GPU enabled for CUDA 11.3. Other CUDA versions should work as long as the `torch` and `transformers` versions are sufficiently up-to-date.
+To install dependencies, run this:
 
 ```bash
 git clone https://github.com/babylm/evaluation-pipeline
@@ -21,6 +21,8 @@ cd evaluation-pipeline
 pip install -e ".[dev]"
 pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
 ```
+
+If your GPU is compatible with CUDA 10, replace all instances of `cu113` with `cu102`.
 
 ### Data
 We provide versions of BLiMP and GLUE which have been filtered according to the vocabulary of the `strict-small` dataset. We filter for examples where each word has appeared in our training set at least twice.
