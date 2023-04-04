@@ -1,9 +1,3 @@
-"""
-This implementation is based closely on EncT5: https://arxiv.org/abs/2110.08426
-This approach tends to perform better than simply appending a classification head
-to T5, especially when reducing the number of parameters in T5-like models.
-"""
-
 import torch
 import copy
 from torch import nn
