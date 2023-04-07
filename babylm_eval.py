@@ -24,7 +24,7 @@ if __name__ == "__main__":
                         help="Path to huggingface model and tokenizer.")
     parser.add_argument("model_type", type=str, choices=["decoder only", "decoder", "encoder only", "encoder", "encoder-decoder",],
                         help="Language model architecture.")
-    parser.add_argument("--tasks", "-t", type=str, choices=["blimp", "glue"], default="blimp",
+    parser.add_argument("--tasks", "-t", type=str, choices=["blimp", "glue", "custom"], default="blimp",
                         help="Tasks on which we evaluate.")
     parser.add_argument("--num_fewshot", "-n", type=int, default=0,
                         help="Number of few-shot examples to show the model for each test example.")
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     # Iterate through tasks, get accuracies
     for task in tasks:
         if task in TASKS["blimp"]:
-            template = "null_prompt"
+            template = None
             task_title = task.split(".json")[0]
             task = f"blimp_from_file:filter-data/blimp_filtered/{task}"
         elif task in TASKS["glue"]:
@@ -69,7 +69,6 @@ if __name__ == "__main__":
             os.makedirs(out_dir)
         with open(out_path, 'w') as out_file:
             json.dump({"eval_accuracy": accuracies[task_title]}, out_file)
-
 
     # Print scores
     print("\nScores:")
