@@ -17,7 +17,7 @@ import datasets
 import copy
 import re
 import numpy as np
-import promptsource.templates
+# import promptsource.templates
 from lm_eval import tasks
 
 
@@ -88,7 +88,7 @@ class Flores101MT_fewshot_wmt_fr2en(Flores101MT):
         data_dir: Optional[str] = None,
         cache_dir: Optional[str] = None,
         download_mode: Optional[str] = None,
-        prompt_template: Optional[promptsource.templates.Template] = None,
+        prompt_template: Optional[str] = None,
         example_separator: Optional[str] = "\n###\n",
         text_target_separator: Optional[str] = " ",
         save_examples: Optional[bool] = True,

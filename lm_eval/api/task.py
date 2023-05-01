@@ -4,7 +4,7 @@ import re
 import datasets
 import os
 import numpy as np
-import promptsource.templates
+# import promptsource.templates
 from abc import abstractmethod
 from typing import Callable, List, Mapping, Optional, Tuple, Union
 
@@ -256,7 +256,7 @@ class PromptSourceTask(Task):
         data_dir: Optional[str] = None,
         cache_dir: Optional[str] = None,
         download_mode: Optional[str] = None,
-        prompt_template: Optional[promptsource.templates.Template] = None,
+        prompt_template: Optional[str] = None,
         example_separator: Optional[str] = "\n###\n",
         text_target_separator: Optional[str] = " ",
         save_examples: Optional[bool] = True,

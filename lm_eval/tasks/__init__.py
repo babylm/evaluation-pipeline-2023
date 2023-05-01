@@ -1,6 +1,6 @@
 import logging
 from typing import List, Mapping, Tuple, Type, Optional, Union
-from promptsource.templates import DatasetTemplates
+# from promptsource.templates import DatasetTemplates
 
 import lm_eval.api.utils
 from lm_eval.api.task import Task
@@ -308,12 +308,14 @@ def list_templates(task_name: str) -> List[str]:
     templates = get_templates(task_name)
     return sorted(templates.all_template_names)
 
-
+"""
 def get_templates(task_name: str) -> DatasetTemplates:
-    """Returns the `promptsource` `DatasetTemplates` for the specified task name."""
+    # Returns the `promptsource` `DatasetTemplates` for the specified task name.
     task_class = _get_task_from_registry(task_name)
     return _get_templates_from_task(task_class)
-
+"""
+def get_templates(task_name: str):
+    return None
 
 def get_task_list_from_args_string(
     task_name: str,
@@ -357,7 +359,7 @@ def _get_task_from_registry(task_name: str) -> Type[Task]:
         logger.warning(f"Available tasks:\n{list_tasks()}")
         raise KeyError(f"`{task_name}` is missing from the task registry.")
 
-
+"""
 def _get_templates_from_task(task: Union[Task, Type[Task]]) -> DatasetTemplates:
     dataset_name = (
         task.DATASET_PATH
@@ -365,7 +367,9 @@ def _get_templates_from_task(task: Union[Task, Type[Task]]) -> DatasetTemplates:
         else f"{task.DATASET_PATH}/{task.DATASET_NAME}"
     )
     return DatasetTemplates(dataset_name)
-
+"""
+def _get_templates_from_task(task):
+    return None
 
 # TODO(jon-tow): Refactor everything below! These functions are only required
 # b/c the task registry is non-uniformly hard-coded.

@@ -7,7 +7,8 @@ language processing.
 
 Homepage: https://machinetranslate.org/wmt
 """
-import promptsource.utils
+
+# import promptsource.utils
 from typing import Dict, List, Optional
 
 from lm_eval.api.task import TranslationTask

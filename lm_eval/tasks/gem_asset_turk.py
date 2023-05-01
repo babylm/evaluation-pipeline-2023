@@ -17,7 +17,7 @@ paraphrasing (no sentence splitting or deletion).
 https://cocoxu.github.io/publications/tacl2016-smt-simplification.pdf
 """
 from typing import Optional
-from promptsource.templates import Template
+# from promptsource.templates import Template
 
 from lm_eval.api.task import PromptSourceTask
 
@@ -55,7 +55,7 @@ class AssetTurk(PromptSourceTask):
         data_dir: Optional[str] = None,
         cache_dir: Optional[str] = None,
         download_mode: Optional[str] = None,
-        prompt_template: Optional[Template] = None,
+        prompt_template: Optional[str] = None,
         example_separator: Optional[str] = "\n###\n",
         text_target_separator: Optional[str] = " ",
         save_examples: Optional[bool] = True,
