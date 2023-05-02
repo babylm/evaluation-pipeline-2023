@@ -77,6 +77,7 @@ class HuggingFaceAutoLM(TokenLM):
         max_cpu_memory: Optional[Union[int, str]] = None,
         offload_folder: Optional[str] = "./offload",
         dtype: Optional[Union[str, torch.dtype]] = None,
+        trust_remote_code: Optional[bool] = False,
         device: Optional[Union[int, str]] = "cuda",
     ):
         """Initializes a HuggingFace `AutoModel` and `AutoTokenizer` for evaluation.
@@ -128,7 +129,6 @@ class HuggingFaceAutoLM(TokenLM):
                 Use `dtype="auto"` to derive the type from the model’s weights.
         """
         super().__init__()
-
         assert isinstance(pretrained, str)
         assert isinstance(device, str)
         assert isinstance(batch_size, int)
@@ -151,7 +151,7 @@ class HuggingFaceAutoLM(TokenLM):
         self._config = self.AUTO_CONFIG_CLASS.from_pretrained(
             pretrained,
             revision=revision + ("/" + subfolder if subfolder is not None else ""),
-            trust_remote_code=True,
+            trust_remote_code=trust_remote_code,
         )
 
         self._add_special_tokens = add_special_tokens
@@ -160,6 +160,7 @@ class HuggingFaceAutoLM(TokenLM):
             revision=revision,
             subfolder=subfolder,
             tokenizer=tokenizer,
+            trust_remote_code=trust_remote_code,
         )
         self.tokenizer.model_max_length = self.max_length
 
@@ -176,6 +177,7 @@ class HuggingFaceAutoLM(TokenLM):
             revision=revision,
             subfolder=subfolder,
             torch_dtype=_get_dtype(dtype, self._config),
+            trust_remote_code=trust_remote_code,
             **accelerate_kwargs,
         )
         self.model.eval()
@@ -200,6 +202,7 @@ class HuggingFaceAutoLM(TokenLM):
         max_memory: Optional[dict] = None,
         offload_folder: Optional[str] = None,
         torch_dtype: Optional[Union[str, torch.dtype]] = None,
+        trust_remote_code: Optional[bool] = False,
     ) -> transformers.AutoModel:
         """Returns a pre-trained pytorch model from a pre-trained model configuration."""
         model = self.AUTO_MODEL_CLASS.from_pretrained(
@@ -209,7 +212,7 @@ class HuggingFaceAutoLM(TokenLM):
             max_memory=max_memory,
             offload_folder=offload_folder,
             torch_dtype=torch_dtype,
-            trust_remote_code=True,
+            trust_remote_code=trust_remote_code,
         )
         return model
 
@@ -221,13 +224,14 @@ class HuggingFaceAutoLM(TokenLM):
         subfolder: str,
         tokenizer: Optional[str] = None,
         use_fast: Optional[bool] = True,
+        trust_remote_code: Optional[bool] = False,
     ) -> transformers.PreTrainedTokenizer:
         """Returns a pre-trained tokenizer from a pre-trained tokenizer configuration."""
         tokenizer = self.AUTO_TOKENIZER_CLASS.from_pretrained(
             pretrained if tokenizer is None else tokenizer,
             revision=revision + ("/" + subfolder if subfolder is not None else ""),
             use_fast=use_fast,
-            trust_remote_code=True,
+            trust_remote_code=trust_remote_code,
         )
         if not tokenizer.eos_token:
             tokenizer.add_special_tokens({"eos_token": "</s>"})
