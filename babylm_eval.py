@@ -28,6 +28,8 @@ if __name__ == "__main__":
                         help="Tasks on which we evaluate.")
     parser.add_argument("--num_fewshot", "-n", type=int, default=0,
                         help="Number of few-shot examples to show the model for each test example.")
+    parser.add_argument("--trust_remote_code", "-r", action="store_true",
+                        help="Trust remote code (e.g. from huggingface) when loading model.")
     args = parser.parse_args()
 
     MODEL_TYPE_REMAP = {"decoder only": "hf-causal", "decoder": "hf-causal",
@@ -35,6 +37,7 @@ if __name__ == "__main__":
                         "encoder-decoder": "hf-seq2seq",}
     eval_model = lm_eval.get_model(MODEL_TYPE_REMAP[args.model_type],
                                    pretrained=args.model_path,
+                                   trust_remote_code=args.trust_remote_code,
                                    device="cuda")
     tasks = []
     if args.tasks == "all":
