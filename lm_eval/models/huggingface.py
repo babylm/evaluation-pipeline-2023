@@ -668,16 +668,18 @@ class AutoMaskedLM(HuggingFaceAutoLM):
 
         token_idx = encoded['input_ids']
         attention_masks = encoded['attention_mask']
+        postag_idx = encoded['pos_tag_ids'] if 'pos_tag_ids' in encoded else [None] * len(token_idx)
 
         masked_tensors = [] # token ids, attention masks, lengths
 
-        for token_ids, attention_mask in zip(token_idx, attention_masks):
+        for token_ids, attention_mask, postag_ids in zip(token_idx, attention_masks, postag_idx):
             token_ids = torch.tensor(token_ids)
             # final_lengths = len(token_ids) - 2
             attention_mask = torch.tensor(attention_mask)
             
             token_ids_masked_list = []
             attention_masked_list = []
+            postag_masked_list = []
 
             effective_token_ids = [token for token in token_ids if token != self.tokenizer.pad_token_id and token != self.tokenizer.cls_token_id and token != self.tokenizer.sep_token_id]
             effective_length = len(effective_token_ids)
@@ -693,10 +695,19 @@ class AutoMaskedLM(HuggingFaceAutoLM):
                 token_ids_masked = token_ids.clone()
                 token_ids_masked[mask_set] = mask_token_id
                 attention_masked = attention_mask.clone()
-                
                 attention_masked_list.append(attention_masked)
                 token_ids_masked_list.append(token_ids_masked)
-            masked_tensors.append((torch.stack(token_ids_masked_list), torch.stack(attention_masked_list), effective_token_ids, len(mask_indices), 1))
+
+                if postag_ids is not None:
+                    postag_mask_token_id = self.tokenizer.pos_tag2idx["<MASK>"]
+                    postag_ids = torch.tensor(postag_ids)
+                    postag_ids_masked = postag_ids.clone()
+                    postag_ids_masked[mask_set] = postag_mask_token_id
+                    postag_masked_list.append(postag_ids_masked)
+
+            masked_tensors.append((torch.stack(token_ids_masked_list), torch.stack(attention_masked_list), 
+                                   torch.stack(postag_masked_list) if len(postag_masked_list) > 0 else None, 
+                                   effective_token_ids, len(mask_indices), 1))
         
         return masked_tensors
 
@@ -719,17 +730,22 @@ class AutoMaskedLM(HuggingFaceAutoLM):
 
             tokenized = self._prepare_text(continuation)
 
-            token_ids, attention_masks, effective_token_ids, lengths, offsets = list(zip(*tokenized))
+            token_ids, attention_masks, postag_ids, effective_token_ids, lengths, offsets = list(zip(*tokenized))
             token_ids = torch.cat(token_ids)
             attention_masks = torch.cat(attention_masks)
             token_ids = token_ids.to(self.device)
             attention_masks = attention_masks.to(self.device)
             effective_token_ids = torch.cat([torch.tensor(x) for x in effective_token_ids])
-            
-            indices = list(chain.from_iterable([list(range(o,o+n)) for n, o in zip(lengths, offsets)]))
 
+            model_kwargs = {"attention_mask": attention_masks}
+            if len(postag_ids) > 0:
+                postag_ids = torch.cat(postag_ids)
+                postag_ids = postag_ids.to(self.device)
+                model_kwargs["pos_tag_ids"] = postag_ids
+
+            indices = list(chain.from_iterable([list(range(o,o+n)) for n, o in zip(lengths, offsets)]))
             with torch.no_grad():
-                output = self.model(token_ids, attention_mask = attention_masks)
+                output = self.model(token_ids, **model_kwargs)
                 logits = output.logits.detach()[torch.arange(sum(lengths)), indices]
 
             logprob_distribution = logits - logits.logsumexp(1).unsqueeze(1)
