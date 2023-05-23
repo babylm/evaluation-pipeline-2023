@@ -606,9 +606,14 @@ class AutoSeq2SeqLM(HuggingFaceAutoLM):
 
 
 class AutoMaskedLM(HuggingFaceAutoLM):
-    """Seq2Seq language modeling.
+    """Masked language modeling.
     You can find a set of supported models in the following documentation:
-    https://huggingface.co/docs/transformers/main/model_doc/auto#transformers.AutoModelForSeq2SeqLM
+    https://huggingface.co/docs/transformers/main/model_doc/auto#transformers.AutoModelForMaskedLM
+    
+    Much of the code in this class is adapted from minicons, by Kanishka Misra:
+    https://github.com/kanishkamisra/minicons
+    which is itself adapted from the code of Salazar et al. (2020):
+    https://github.com/awslabs/mlm-scoring
     """
 
     AUTO_MODEL_CLASS = transformers.AutoModelForMaskedLM
@@ -661,7 +666,7 @@ class AutoMaskedLM(HuggingFaceAutoLM):
             tokens = self.tokenizer.batch_encode_plus(sentences, padding = 'longest', return_attention_mask = True)
 
         return tokens
-
+    
     def _prepare_text(self, text: Union[str, List[str]]):
         sentences = [text] if isinstance(text, str) else list(text) if isinstance(text, tuple) else text
         encoded = self.encode(sentences, manual_special = False)

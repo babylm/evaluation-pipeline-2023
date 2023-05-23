@@ -11,6 +11,8 @@ We also provide a [Colab demo](https://colab.research.google.com/drive/1HX2D3wzt
 
 If you have questions about or suggestions for this code, please open an issue and consider [joining our Slack](https://join.slack.com/t/babylmchallenge/shared_invite/zt-1s8el4mro-qvVO447l3POBZcUNvMWQcg). We also welcome pull requests!
 
+We adapt this primarily from the BigScience fork of [lm-eval-harness](https://github.com/bigscience-workshop/lm-evaluation-harness), originally by EleutherAI. Support for masked language models was made possible by [minicons](https://github.com/kanishkamisra/minicons)' implementation of MLM scoring (itself based on [code by Salazar et al. (2020)](https://github.com/awslabs/mlm-scoring)).
+
 ## Installation
 
 To install dependencies, run this:
