@@ -114,6 +114,8 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 
 These are naïve baselines that are meant to provide a starting point for investigation. We look forward to seeing how you will improve upon these!
 
+We [provide the code](https://github.com/babylm/baseline-pretraining) used to train these baselines. We do not recommend using this for your own models, as it loads tokenizers from huggingface instead of training from scratch on the BabyLM data (which does not qualify for any of our tracks). That said, we found (in some quick preliminary experiments) that simply training tokenizers on the BabyLM data often outperforms these baselines!
+
 ## Citation
 If you use the datasets or code from this repository, please cite the BabyLM Call for Papers:
 
