@@ -2,6 +2,7 @@ import argparse
 import lm_eval
 import os
 import json
+import torch.distributed as dist
 
 TASKS = {
     "glue":  ["cola", "sst", "mrpc", "qqp", "mnli", "mnli_mismatched", "qnli", "rte",
@@ -30,6 +31,9 @@ if __name__ == "__main__":
                         help="Number of few-shot examples to show the model for each test example.")
     parser.add_argument("--trust_remote_code", "-r", action="store_true",
                         help="Trust remote code (e.g. from huggingface) when loading model.")
+    parser.add_argument('--device', type=str, default="cuda",) #NOTE: For DDP evaluation
+    parser.add_argument('--process_index', type=int, default=0,) #NOTE: For DDP evaluation
+    parser.add_argument('--world_size', type=int, default=1,) #NOTE: For DDP evaluation
     args = parser.parse_args()
 
     MODEL_TYPE_REMAP = {"decoder only": "hf-causal", "decoder": "hf-causal",
@@ -38,7 +42,7 @@ if __name__ == "__main__":
     eval_model = lm_eval.get_model(MODEL_TYPE_REMAP[args.model_type],
                                    pretrained=args.model_path,
                                    trust_remote_code=args.trust_remote_code,
-                                   device="cuda")
+                                   device=args.device) #NOTE: For DDP evaluation
     tasks = []
     if args.tasks == "all":
         for task_type in TASKS.keys():
@@ -48,7 +52,11 @@ if __name__ == "__main__":
 
     accuracies = {}
     # Iterate through tasks, get accuracies
-    for task in tasks:
+    for task_idx, task in enumerate(tasks):
+        
+        if (task_idx % args.world_size) != args.process_index:
+            continue
+
         if task in TASKS["blimp"]:
             template = "null_prompt"
             task_title = task.split(".json")[0]
@@ -72,8 +80,7 @@ if __name__ == "__main__":
             os.makedirs(out_dir)
         with open(out_path, 'w') as out_file:
             json.dump({"eval_accuracy": accuracies[task_title]}, out_file)
-
-
+    
     # Print scores
     print("\nScores:")
     for task in accuracies.keys():
