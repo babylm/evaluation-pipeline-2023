@@ -77,6 +77,7 @@ class HuggingFaceAutoLM(TokenLM):
         max_cpu_memory: Optional[Union[int, str]] = None,
         offload_folder: Optional[str] = "./offload",
         dtype: Optional[Union[str, torch.dtype]] = None,
+        trust_remote_code: Optional[bool] = False,
         device: Optional[Union[int, str]] = "cuda",
     ):
         """Initializes a HuggingFace `AutoModel` and `AutoTokenizer` for evaluation.
@@ -128,7 +129,6 @@ class HuggingFaceAutoLM(TokenLM):
                 Use `dtype="auto"` to derive the type from the model’s weights.
         """
         super().__init__()
-
         assert isinstance(pretrained, str)
         assert isinstance(device, str)
         assert isinstance(batch_size, int)
@@ -151,6 +151,7 @@ class HuggingFaceAutoLM(TokenLM):
         self._config = self.AUTO_CONFIG_CLASS.from_pretrained(
             pretrained,
             revision=revision + ("/" + subfolder if subfolder is not None else ""),
+            trust_remote_code=trust_remote_code,
         )
 
         self._add_special_tokens = add_special_tokens
@@ -159,6 +160,7 @@ class HuggingFaceAutoLM(TokenLM):
             revision=revision,
             subfolder=subfolder,
             tokenizer=tokenizer,
+            trust_remote_code=trust_remote_code,
         )
         self.tokenizer.model_max_length = self.max_length
 
@@ -175,6 +177,7 @@ class HuggingFaceAutoLM(TokenLM):
             revision=revision,
             subfolder=subfolder,
             torch_dtype=_get_dtype(dtype, self._config),
+            trust_remote_code=trust_remote_code,
             **accelerate_kwargs,
         )
         self.model.eval()
@@ -199,6 +202,7 @@ class HuggingFaceAutoLM(TokenLM):
         max_memory: Optional[dict] = None,
         offload_folder: Optional[str] = None,
         torch_dtype: Optional[Union[str, torch.dtype]] = None,
+        trust_remote_code: Optional[bool] = False,
     ) -> transformers.AutoModel:
         """Returns a pre-trained pytorch model from a pre-trained model configuration."""
         model = self.AUTO_MODEL_CLASS.from_pretrained(
@@ -208,6 +212,7 @@ class HuggingFaceAutoLM(TokenLM):
             max_memory=max_memory,
             offload_folder=offload_folder,
             torch_dtype=torch_dtype,
+            trust_remote_code=trust_remote_code,
         )
         return model
 
@@ -219,12 +224,14 @@ class HuggingFaceAutoLM(TokenLM):
         subfolder: str,
         tokenizer: Optional[str] = None,
         use_fast: Optional[bool] = True,
+        trust_remote_code: Optional[bool] = False,
     ) -> transformers.PreTrainedTokenizer:
         """Returns a pre-trained tokenizer from a pre-trained tokenizer configuration."""
         tokenizer = self.AUTO_TOKENIZER_CLASS.from_pretrained(
             pretrained if tokenizer is None else tokenizer,
             revision=revision + ("/" + subfolder if subfolder is not None else ""),
             use_fast=use_fast,
+            trust_remote_code=trust_remote_code,
         )
         if not tokenizer.eos_token:
             tokenizer.add_special_tokens({"eos_token": "</s>"})
@@ -599,9 +606,14 @@ class AutoSeq2SeqLM(HuggingFaceAutoLM):
 
 
 class AutoMaskedLM(HuggingFaceAutoLM):
-    """Seq2Seq language modeling.
+    """Masked language modeling.
     You can find a set of supported models in the following documentation:
-    https://huggingface.co/docs/transformers/main/model_doc/auto#transformers.AutoModelForSeq2SeqLM
+    https://huggingface.co/docs/transformers/main/model_doc/auto#transformers.AutoModelForMaskedLM
+    
+    Much of the code in this class is adapted from minicons, by Kanishka Misra:
+    https://github.com/kanishkamisra/minicons
+    which is itself adapted from the code of Salazar et al. (2020):
+    https://github.com/awslabs/mlm-scoring
     """
 
     AUTO_MODEL_CLASS = transformers.AutoModelForMaskedLM
@@ -654,7 +666,7 @@ class AutoMaskedLM(HuggingFaceAutoLM):
             tokens = self.tokenizer.batch_encode_plus(sentences, padding = 'longest', return_attention_mask = True)
 
         return tokens
-
+    
     def _prepare_text(self, text: Union[str, List[str]]):
         sentences = [text] if isinstance(text, str) else list(text) if isinstance(text, tuple) else text
         encoded = self.encode(sentences, manual_special = False)
