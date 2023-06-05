@@ -38,6 +38,9 @@ from . import tydiqa
 from . import wino_bias
 from . import wmt
 from . import xquad
+from . import aoa_pred
+
+aoa_pred_eval = aoa_pred.aoa_pred_eval
 
 
 logger = logging.getLogger(__name__)
@@ -273,7 +276,7 @@ def get_task(task_name: str, template_name: Optional[str] = None, **task_kwargs)
         task_name = task_str
         task_kwargs.update({"file_path": file_path})
     task_class = _get_task_from_registry(task_name)
-    
+
     if template_name is None:
         return task_class(**task_kwargs)
 

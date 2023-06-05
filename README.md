@@ -3,13 +3,15 @@
 
 ## Overview
 
-This code provides the backend for the BabyLM Challenge's evaluation pipeline. 
+This code provides the backend for the BabyLM Challenge's evaluation pipeline.
 
 We provide support for zero-shot evaluations on BLiMP, as well as scripts for fine-tuning HuggingFace-based models on GLUE tasks.
 
 We also provide a [Colab demo](https://colab.research.google.com/drive/1HX2D3wztO81tKcqCeV_ecRcEUseBVuTc?usp=sharing) of the evaluation pipeline as a demonstration of how to use the code.
 
 If you have questions about or suggestions for this code, please open an issue and consider [joining our Slack](https://join.slack.com/t/babylmchallenge/shared_invite/zt-1s8el4mro-qvVO447l3POBZcUNvMWQcg). We also welcome pull requests!
+
+We adapt this primarily from the BigScience fork of [lm-eval-harness](https://github.com/bigscience-workshop/lm-evaluation-harness), originally by EleutherAI. Support for masked language models was made possible by [minicons](https://github.com/kanishkamisra/minicons)' implementation of MLM scoring (itself based on [code by Salazar et al. (2020)](https://github.com/awslabs/mlm-scoring)).
 
 ## Installation
 
@@ -45,6 +47,16 @@ To fine-tune and evaluate a model on tasks that require fine-tuning, like the (S
 ```bash
 ./finetune_all_tasks.sh 'path/to/model_and_tokenizer'
 ```
+
+### Age-of-acquisition prediction Evaluation
+This evaluation is based on Portelance, Duan, Lupyan and Frank 2023 (see citation below).
+
+It will automatically run after the "zero-shot" evaluations above (i.e. it runs using the same command). Note, the evaluation requires access to forward pass labels from your tokenizer. It currently expects the tokenizer to either produce them under the key "labels" if the model type is a "decoder" where labels represent the shifted "input_ids", or if no labels are provided, it will set the "labels" to be equal to the "input_ids" (this is done automatically for "encoder" and "encoder-decoder" type models. In the event that your labels are not equal to the input_ids, please make sure your tokenizer contains them under the key "labels".
+
+Once it runs, it will produce two json files in a folder called "aoa_prediction" in the model directory provided. One of the files contains the estimated average surprisal of words for the model in child directed utterances taken from CHILDES. The other contains the results of the evaluation. Models are evaluated using leave-one-out cross validation. The results are Mean Absolute Deviation (MAD) scores in months between the actual average age-of-acquisition (aoa) of these words by American English speaking children and the predicted aoa based on the models average surprisal scores (the closer the MAD scores are to zero, the better). MAD scores are provided over all the words, over nouns, over predicates, and over function words. Previous work has found that models tend to do better at predicting the aoa of predicates and function words over nouns.
+
+The better the fit better a model's predictions and the actual aoa of words in kids (the smaller the MAD scores), the more the order in which models learn words resembles the order in which children tend to learn words.
+
 
 #### Hyperparameters
 This script contains hyperparameter defaults that should work for a variety of model sizes, architectures, and tasks. You may adjust these hyperparameters as you wish, though we ask that you submit the best hyperparmeter settings in a README file if you don't use the defaults.
@@ -92,6 +104,14 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 | RoBERTa-base | 70.8 | 87.0 | 79.2 | 73.7 | 73.2 | 74.0 | 77.0 | 61.6 | 66.3 | 61.4 | 61.4 |
 | T5-base | 61.2 | 78.1 | 80.5 | 66.2 | 48.0 | 50.3 | 62.0 | 49.4 | 66.0 | 47.1 | 61.4 |
 
+*Age-of-acquisition Prediction*
+(Mean absolute deviation in months across LOO cross-validation folds)
+| Model | Overall (591 words) | Nouns (322) | Predicates (167) | Function words (102) |
+| --- | --- | --- | --- | --- |
+| OPT-125m | 2.03 | 1.98 | 1.81 | 2.57 |
+| RoBERTa-base | 2.06 | 1.99 | 1.85 | 2.65 |
+| T5-base | 2.04 | 1.97 | 1.82 | 2.64 |
+
 -------------
 
 **Strict Track**
@@ -110,16 +130,27 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 | OPT-125m | 73.7 | 86.6 | 82.1 | 77.8 | 70.1 | 71.9 | 80.1 | 67.7 | 66.0 | 61.1 | 59.0 |
 | RoBERTa-base | 75.9 | 88.6 | 80.5 | 78.5 | 68.7 | 78.0 | 82.3 | 51.5 | 59.9 | 61.3 | 61.4 |
 | T5-base | 76.3 | 88.0 | 85.9 | 79.7 | 71.5 | 74.0 | 83.1 | 60.6 | 69.0 | 62.4 | 60.2 |
+
+*Age-of-acquisition Prediction*
+(Mean absolute deviation in months across LOO cross-validation folds)
+| Model | Overall (591 words) | Nouns (322) | Predicates (167) | Function words (102) |
+| --- | --- | --- | --- | --- |
+| OPT-125m | 2.04 | 1.97 | 1.83 | 2.61 |
+| RoBERTa-base | 2.06 | 1.99 | 1.82 | 2.66 |
+| T5-base | 2.06 | 2.0 | 1.83 | 2.65 |
+
 -----------------------
 
 These are naïve baselines that are meant to provide a starting point for investigation. We look forward to seeing how you will improve upon these!
+
+We [provide the code](https://github.com/babylm/baseline-pretraining) used to train these baselines. We do not recommend using this for your own models, as it loads tokenizers from huggingface instead of training from scratch on the BabyLM data (which does not qualify for any of our tracks). That said, we found (in some quick preliminary experiments) that simply training tokenizers on the BabyLM data often outperforms these baselines!
 
 ## Citation
 If you use the datasets or code from this repository, please cite the BabyLM Call for Papers:
 
 ```
 @article{warstadt2023papers,
-      title     = {Call for Papers -- The BabyLM Challenge: Sample-efficient pretraining on a developmentally plausible corpus}, 
+      title     = {Call for Papers -- The BabyLM Challenge: Sample-efficient pretraining on a developmentally plausible corpus},
       author    = {Warstadt, Alex and
                    Choshen, Leshem and
                    Mueller, Aaron and
@@ -161,3 +192,12 @@ Please also cite the lm-eval-harness paper:
   url          = {https://doi.org/10.5281/zenodo.5371628}
 }
 ```
+
+Please cite the following if you choose to include the Age-of-acquisition prediction evaluation:
+```
+@manuscript{portelance2023predicting,
+    author = {Portelance, Eva and Duan, Yuguang and Frank, Michael C. and Lupyan, Gary},
+    title = {Predicting age of acquisition for children’s early vocabulary in five languages using language model surprisal},
+    year = {2023},
+    url = {https://github.com/evaportelance/multilingual-aoa-prediction}
+    }
