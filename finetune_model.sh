@@ -9,7 +9,7 @@ EVAL_EVERY=${6:-200}    # default: 200
 MAX_EPOCHS=${7:-10}     # default: 10
 SEED=${8:-12}           # default: 12
 
-mkdir -p $MODEL_PATH/finetune/$TASK_NAME/
+mkdir -p finetune/$MODEL_PATH/$TASK_NAME/
 
 if [[ "$TASK_NAME" = "mnli" ]]; then
     VALID_NAME="validation_matched"
@@ -26,7 +26,7 @@ fi
 #CUDA_VISIBLE_DEVICES=`free-gpu` python finetune_classification.py \
 python finetune_classification.py \
   --model_name_or_path $MODEL_PATH \
-  --output_dir $MODEL_PATH/finetune/$OUT_DIR/ \
+  --output_dir finetune/$MODEL_PATH/$OUT_DIR/ \
   --train_file filter-data/glue_filtered/$TASK_NAME.train.json \
   --validation_file filter-data/glue_filtered/$TASK_NAME.$VALID_NAME.json \
   --do_train \
@@ -41,4 +41,5 @@ python finetune_classification.py \
   --eval_every $EVAL_EVERY \
   --eval_steps $EVAL_EVERY \
   --overwrite_output_dir \
-  --seed $SEED
+  --seed $SEED \
+  --trust_remote_code

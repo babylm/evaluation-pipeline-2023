@@ -23,8 +23,7 @@ def _get_accelerate_args(
     max_memory = {}
     if max_memory_per_gpu is not None:
         max_memory_per_gpu_map = {
-            device_idx: max_memory_per_gpu
-            for device_idx in range(torch.cuda.device_count())
+            device_idx: max_memory_per_gpu for device_idx in range(torch.cuda.device_count())
         }
         max_memory.update(max_memory_per_gpu_map)
     if max_cpu_memory is not None:
@@ -328,18 +327,14 @@ class HuggingFaceAutoLM(TokenLM):
 
         results = []
         reorder = utils.Reorderer(requests, _collate)
-        for chunk in utils.chunks(
-            tqdm(reorder.get_reordered(), disable=False), self.batch_size
-        ):
+        for chunk in utils.chunks(tqdm(reorder.get_reordered(), disable=False), self.batch_size):
             context = [c[0] for c in chunk]
             request_args = chunk[0][1]
             stop_sequences = request_args["stop_sequences"]
             max_generation_length = request_args["max_generation_length"]
             num_fewshot = request_args["num_fewshot"]
 
-            assert (
-                isinstance(max_generation_length, int) or max_generation_length is None
-            )
+            assert isinstance(max_generation_length, int) or max_generation_length is None
             assert isinstance(stop_sequences, list) or stop_sequences is None
             assert isinstance(num_fewshot, int) or num_fewshot is None
 
@@ -388,6 +383,7 @@ class AutoCausalLM(HuggingFaceAutoLM):
         revision: str,
         subfolder: str,
         tokenizer: Optional[str] = None,
+        trust_remote_code: Optional[bool] = False,
     ) -> transformers.PreTrainedTokenizer:
         tokenizer = super()._create_auto_tokenizer(
             pretrained=pretrained,
@@ -395,6 +391,7 @@ class AutoCausalLM(HuggingFaceAutoLM):
             subfolder=subfolder,
             tokenizer=tokenizer,
             use_fast=False,
+            trust_remote_code=trust_remote_code,
         )
         tokenizer.padding_side = "left"
         return tokenizer
@@ -413,9 +410,7 @@ class AutoCausalLM(HuggingFaceAutoLM):
         # Ensure that the context does not encroach into the `space`
         # for the generation.
         input_ids = inputs["input_ids"][:, self.max_gen_toks - self.max_length :]
-        attention_mask = inputs["attention_mask"][
-            :, self.max_gen_toks - self.max_length :
-        ]
+        attention_mask = inputs["attention_mask"][:, self.max_gen_toks - self.max_length :]
         input_ids = input_ids.to(self.device)
         attention_mask = attention_mask.to(self.device)
 
@@ -455,17 +450,13 @@ class AutoSeq2SeqLM(HuggingFaceAutoLM):
             return self._max_length
         return self._DEFAULT_MAX_LENGTH
 
-    def loglikelihood(
-        self, requests: List[Tuple[str, str]]
-    ) -> List[Tuple[float, bool]]:
+    def loglikelihood(self, requests: List[Tuple[str, str]]) -> List[Tuple[float, bool]]:
         new_requests = []
         for chunk in utils.chunks(requests, self.batch_size):
             context, continuation = zip(*chunk)
 
             # Fill empty contexts with the EOT token.
-            context = [
-                f"{self.eot_token}" if len(text) == 0 else text for text in context
-            ]
+            context = [f"{self.eot_token}" if len(text) == 0 else text for text in context]
             context_enc = self.tok_encode_batch(context)
             for key in context_enc:
                 context_enc[key] = context_enc[key][:, -self.max_length :]
@@ -478,9 +469,7 @@ class AutoSeq2SeqLM(HuggingFaceAutoLM):
             for key in continuation_enc:
                 continuation_enc[key] = continuation_enc[key][:, -self.max_length :]
 
-            new_requests.append(
-                ((context, continuation), context_enc, continuation_enc)
-            )
+            new_requests.append(((context, continuation), context_enc, continuation_enc))
         return self._loglikelihood_tokens(new_requests)
 
     def loglikelihood_rolling(self, requests: List[Tuple[str, str]]) -> List[float]:
@@ -520,9 +509,7 @@ class AutoSeq2SeqLM(HuggingFaceAutoLM):
             )
             # TODO: Extract out this call so it only gets called once and also
             # somehow figure out partial caching for.
-            rolling_token_windows_request = [
-                ((contexts, conts), contexts_enc, conts_enc)
-            ]
+            rolling_token_windows_request = [((contexts, conts), contexts_enc, conts_enc)]
             string_nll = self._loglikelihood_tokens(
                 rolling_token_windows_request, disable_tqdm=True
             )
@@ -537,9 +524,7 @@ class AutoSeq2SeqLM(HuggingFaceAutoLM):
         disable_tqdm: Optional[bool] = False,
     ) -> List[Tuple[float, bool]]:
         results = []
-        for chunk in tqdm(
-            requests, total=math.ceil(len(requests)), disable=disable_tqdm
-        ):
+        for chunk in tqdm(requests, total=math.ceil(len(requests)), disable=disable_tqdm):
             cache_keys, inputs_tokens, targets_tokens = chunk
             inputs_tokens = inputs_tokens.to(self.device)
             targets_tokens = targets_tokens.to(self.device)
@@ -558,9 +543,9 @@ class AutoSeq2SeqLM(HuggingFaceAutoLM):
                 target_tokens = target_tokens[:length]
                 greedy_tokens = log_softmax.argmax(dim=-1)
                 max_equal = (greedy_tokens == target_tokens).all()
-                target_logits = torch.gather(
-                    log_softmax, 1, target_tokens.unsqueeze(-1)
-                ).squeeze(-1)
+                target_logits = torch.gather(log_softmax, 1, target_tokens.unsqueeze(-1)).squeeze(
+                    -1
+                )
                 answer = (float(target_logits.sum()), bool(max_equal))
                 results.append(answer)
                 if cache_key is not None:
@@ -591,9 +576,7 @@ class AutoSeq2SeqLM(HuggingFaceAutoLM):
         # initial_decoder_input_length = len(one_tok_gen) - 1
 
         # Assume that there will always only be one token in the decoder inputs, assumption holds for existing HF models
-        stopping_criteria = stop_sequences_criteria(
-            self.tokenizer, stop, 1, input_ids.shape[0]
-        )
+        stopping_criteria = stop_sequences_criteria(self.tokenizer, stop, 1, input_ids.shape[0])
 
         generations = self.model.generate(
             input_ids=input_ids,
@@ -628,14 +611,19 @@ class AutoMaskedLM(HuggingFaceAutoLM):
         return self.model(inputs, labels=labels["input_ids"])
 
     def _model_generate(
-        self, 
+        self,
         inputs: transformers.BatchEncoding,
         max_tokens: int,
         stop: Optional[List[str]] = None,
     ) -> TokenSequence:
         raise NotImplementedError("Masked LMs are not well-suited to generating sequences.")
 
-    def encode(self, text: Union[str, List[str]], manual_special: bool = True, return_tensors: Optional[str] = 'pt') -> Dict:
+    def encode(
+        self,
+        text: Union[str, List[str]],
+        manual_special: bool = True,
+        return_tensors: Optional[str] = "pt",
+    ) -> Dict:
         """
         Encode a batch of sentences using the model's tokenizer.
         Equivalent of calling `model.tokenizer(input)`
@@ -646,7 +634,7 @@ class AutoMaskedLM(HuggingFaceAutoLM):
         :type manual_special: bool
         :param return_tensors: returned tensor format. Default `'pt'`
         :type manual_special: str
-        :return: Encoded batch 
+        :return: Encoded batch
         :rtype: ``Dict``
         """
         sentences = [text] if isinstance(text, str) else text
@@ -655,37 +643,53 @@ class AutoMaskedLM(HuggingFaceAutoLM):
             # manually add special tokens
             sentences = self.add_special_tokens(sentences)
             if return_tensors:
-                tokens = self.tokenizer.batch_encode_plus(sentences, add_special_tokens = False, padding = 'longest', return_attention_mask = True, return_tensors = return_tensors)
+                tokens = self.tokenizer.batch_encode_plus(
+                    sentences,
+                    add_special_tokens=False,
+                    padding="longest",
+                    return_attention_mask=True,
+                    return_tensors=return_tensors,
+                )
         else:
             # mostly for masked LMs
-            tokens = self.tokenizer.batch_encode_plus(sentences, padding = 'longest', return_attention_mask = True)
+            tokens = self.tokenizer.batch_encode_plus(
+                sentences, padding="longest", return_attention_mask=True
+            )
 
         return tokens
 
     def _prepare_text(self, text: Union[str, List[str]]):
-        sentences = [text] if isinstance(text, str) else list(text) if isinstance(text, tuple) else text
-        encoded = self.encode(sentences, manual_special = False)
+        sentences = (
+            [text] if isinstance(text, str) else list(text) if isinstance(text, tuple) else text
+        )
+        encoded = self.encode(sentences, manual_special=False)
 
-        token_idx = encoded['input_ids']
-        attention_masks = encoded['attention_mask']
-        postag_idx = encoded['pos_tag_ids'] if 'pos_tag_ids' in encoded else [None] * len(token_idx)
+        token_idx = encoded["input_ids"]
+        attention_masks = encoded["attention_mask"]
+        postag_idx = encoded["pos_tag_ids"] if "pos_tag_ids" in encoded else [None] * len(token_idx)
 
-        masked_tensors = [] # token ids, attention masks, lengths
+        masked_tensors = []  # token ids, attention masks, lengths
 
         for token_ids, attention_mask, postag_ids in zip(token_idx, attention_masks, postag_idx):
             token_ids = torch.tensor(token_ids)
             # final_lengths = len(token_ids) - 2
             attention_mask = torch.tensor(attention_mask)
-            
+
             token_ids_masked_list = []
             attention_masked_list = []
             postag_masked_list = []
 
-            effective_token_ids = [token for token in token_ids if token != self.tokenizer.pad_token_id and token != self.tokenizer.cls_token_id and token != self.tokenizer.sep_token_id]
+            effective_token_ids = [
+                token
+                for token in token_ids
+                if token != self.tokenizer.pad_token_id
+                and token != self.tokenizer.cls_token_id
+                and token != self.tokenizer.sep_token_id
+            ]
             effective_length = len(effective_token_ids)
 
             mask_indices = []
-            mask_indices = [[mask_pos] for mask_pos in range(effective_length+2)]
+            mask_indices = [[mask_pos] for mask_pos in range(effective_length + 2)]
 
             # We don't mask the [CLS], [SEP] for now for PLL
             mask_indices = mask_indices[1:-1]
@@ -705,20 +709,25 @@ class AutoMaskedLM(HuggingFaceAutoLM):
                     postag_ids_masked[mask_set] = postag_mask_token_id
                     postag_masked_list.append(postag_ids_masked)
 
-            masked_tensors.append((torch.stack(token_ids_masked_list), torch.stack(attention_masked_list), 
-                                   torch.stack(postag_masked_list) if len(postag_masked_list) > 0 else None, 
-                                   effective_token_ids, len(mask_indices), 1))
-        
+            masked_tensors.append(
+                (
+                    torch.stack(token_ids_masked_list),
+                    torch.stack(attention_masked_list),
+                    torch.stack(postag_masked_list) if len(postag_masked_list) > 0 else None,
+                    effective_token_ids,
+                    len(mask_indices),
+                    1,
+                )
+            )
+
         return masked_tensors
 
-    def loglikelihood(
-        self, requests: List[Tuple[str, str]]
-    ) -> List[Tuple[float, bool]]:
+    def loglikelihood(self, requests: List[Tuple[str, str]]) -> List[Tuple[float, bool]]:
         """
         Returns *pseudo*-loglikelihoods, as described in Salazar et al. (2020).
         """
         scores = []
-        
+
         for chunk in utils.chunks(tqdm(requests, disable=False), self.batch_size):
             context, continuation = zip(*chunk)
             context = [
@@ -730,7 +739,9 @@ class AutoMaskedLM(HuggingFaceAutoLM):
 
             tokenized = self._prepare_text(continuation)
 
-            token_ids, attention_masks, postag_ids, effective_token_ids, lengths, offsets = list(zip(*tokenized))
+            token_ids, attention_masks, postag_ids, effective_token_ids, lengths, offsets = list(
+                zip(*tokenized)
+            )
             token_ids = torch.cat(token_ids)
             attention_masks = torch.cat(attention_masks)
             token_ids = token_ids.to(self.device)
@@ -738,12 +749,14 @@ class AutoMaskedLM(HuggingFaceAutoLM):
             effective_token_ids = torch.cat([torch.tensor(x) for x in effective_token_ids])
 
             model_kwargs = {"attention_mask": attention_masks}
-            if len(postag_ids) > 0:
+            if postag_ids[0] is not None:
                 postag_ids = torch.cat(postag_ids)
                 postag_ids = postag_ids.to(self.device)
                 model_kwargs["pos_tag_ids"] = postag_ids
 
-            indices = list(chain.from_iterable([list(range(o,o+n)) for n, o in zip(lengths, offsets)]))
+            indices = list(
+                chain.from_iterable([list(range(o, o + n)) for n, o in zip(lengths, offsets)])
+            )
             with torch.no_grad():
                 output = self.model(token_ids, **model_kwargs)
                 logits = output.logits.detach()[torch.arange(sum(lengths)), indices]
@@ -751,7 +764,7 @@ class AutoMaskedLM(HuggingFaceAutoLM):
             logprob_distribution = logits - logits.logsumexp(1).unsqueeze(1)
 
             # if base_two:
-            logprob_distribution = logprob_distribution/torch.tensor(2).log()
+            logprob_distribution = logprob_distribution / torch.tensor(2).log()
 
             # if prob:
             # logprob_distribution = logprob_distribution.exp()
@@ -770,7 +783,11 @@ class AutoMaskedLM(HuggingFaceAutoLM):
             #     word_ranks = word_ranks[torch.arange(shape[0]), effective_token_ids].split(lengths)
             #     word_ranks = [wr.tolist() for wr in word_ranks]
 
-            batch_scores = logprob_distribution[torch.arange(sum(lengths)), effective_token_ids].type(torch.DoubleTensor).split(lengths)
+            batch_scores = (
+                logprob_distribution[torch.arange(sum(lengths)), effective_token_ids]
+                .type(torch.DoubleTensor)
+                .split(lengths)
+            )
             # print(len(batch_scores[0]))
             # print(len(tokenized[0]))
             batch_scores = [(float(s.sum()),) for s in batch_scores]
@@ -825,9 +842,7 @@ def stop_sequences_criteria(
     return transformers.StoppingCriteriaList(
         [
             *[
-                MultiTokenEOSCriteria(
-                    sequence, tokenizer, initial_decoder_input_length, batch_size
-                )
+                MultiTokenEOSCriteria(sequence, tokenizer, initial_decoder_input_length, batch_size)
                 for sequence in stop_sequences
             ],
         ]

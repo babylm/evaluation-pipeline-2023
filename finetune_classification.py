@@ -53,7 +53,10 @@ from transformers.utils.versions import require_version
 # Will error if the minimal version of Transformers is not installed. Remove at your own risks.
 # check_min_version("4.27.0.dev0")
 
-require_version("datasets>=1.8.0", "To fix: pip install -r examples/pytorch/text-classification/requirements.txt")
+require_version(
+    "datasets>=1.8.0",
+    "To fix: pip install -r examples/pytorch/text-classification/requirements.txt",
+)
 
 task_to_keys = {
     "cola": ("sentence", None),
@@ -85,10 +88,14 @@ class DataTrainingArguments:
         metadata={"help": "The name of the task to train on: " + ", ".join(task_to_keys.keys())},
     )
     dataset_name: Optional[str] = field(
-        default=None, metadata={"help": "The name of the dataset to use (via the datasets library)."}
+        default=None,
+        metadata={"help": "The name of the dataset to use (via the datasets library)."},
     )
     dataset_config_name: Optional[str] = field(
-        default=None, metadata={"help": "The configuration name of the dataset to use (via the datasets library)."}
+        default=None,
+        metadata={
+            "help": "The configuration name of the dataset to use (via the datasets library)."
+        },
     )
     max_seq_length: int = field(
         default=128,
@@ -139,21 +146,19 @@ class DataTrainingArguments:
         },
     )
     patience: Optional[int] = field(
-       default=None,
-       metadata={
+        default=None,
+        metadata={
             "help": (
                 "Number of evaluation steps without improvement > epsilon before stopping fine-tuning. "
                 "Requires the use of the --eval_every argument."
             )
-       },
+        },
     )
     eval_every: Optional[int] = field(
         default=None,
-        metadata = {
-            "help": (
-                "Number of steps between evaluations (MUST be set if patience is set)."
-            )
-        }
+        metadata={
+            "help": ("Number of steps between evaluations (MUST be set if patience is set).")
+        },
     )
     train_file: Optional[str] = field(
         default=None, metadata={"help": "A csv or a json file containing the training data."}
@@ -161,20 +166,29 @@ class DataTrainingArguments:
     validation_file: Optional[str] = field(
         default=None, metadata={"help": "A csv or a json file containing the validation data."}
     )
-    test_file: Optional[str] = field(default=None, metadata={"help": "A csv or a json file containing the test data."})
+    test_file: Optional[str] = field(
+        default=None, metadata={"help": "A csv or a json file containing the test data."}
+    )
 
     def __post_init__(self):
         if self.task_name is not None:
             self.task_name = self.task_name.lower()
             if self.task_name not in task_to_keys.keys():
-                raise ValueError("Unknown task, you should pick one in " + ",".join(task_to_keys.keys()))
+                raise ValueError(
+                    "Unknown task, you should pick one in " + ",".join(task_to_keys.keys())
+                )
         elif self.dataset_name is not None:
             pass
         elif self.train_file is None or self.validation_file is None:
-            raise ValueError("Need either a GLUE task, a training/validation file or a dataset name.")
+            raise ValueError(
+                "Need either a GLUE task, a training/validation file or a dataset name."
+            )
         else:
             train_extension = self.train_file.split(".")[-1]
-            assert train_extension in ["csv", "json"], "`train_file` should be a csv or a json file."
+            assert train_extension in [
+                "csv",
+                "json",
+            ], "`train_file` should be a csv or a json file."
             validation_extension = self.validation_file.split(".")[-1]
             assert (
                 validation_extension == train_extension
@@ -191,26 +205,33 @@ class ModelArguments:
         metadata={"help": "Path to pretrained model or model identifier from huggingface.co/models"}
     )
     freeze_model: bool = field(
-        default=False,
-        metadata={"help": "Whether to freeze the parameters of the base model."}
+        default=False, metadata={"help": "Whether to freeze the parameters of the base model."}
     )
     config_name: Optional[str] = field(
-        default=None, metadata={"help": "Pretrained config name or path if not the same as model_name"}
+        default=None,
+        metadata={"help": "Pretrained config name or path if not the same as model_name"},
     )
     tokenizer_name: Optional[str] = field(
-        default=None, metadata={"help": "Pretrained tokenizer name or path if not the same as model_name"}
+        default=None,
+        metadata={"help": "Pretrained tokenizer name or path if not the same as model_name"},
     )
     cache_dir: Optional[str] = field(
         default=None,
-        metadata={"help": "Where do you want to store the pretrained models downloaded from huggingface.co"},
+        metadata={
+            "help": "Where do you want to store the pretrained models downloaded from huggingface.co"
+        },
     )
     use_fast_tokenizer: bool = field(
         default=True,
-        metadata={"help": "Whether to use one of the fast tokenizer (backed by the tokenizers library) or not."},
+        metadata={
+            "help": "Whether to use one of the fast tokenizer (backed by the tokenizers library) or not."
+        },
     )
     model_revision: str = field(
         default="main",
-        metadata={"help": "The specific model version to use (can be a branch name, tag name or commit id)."},
+        metadata={
+            "help": "The specific model version to use (can be a branch name, tag name or commit id)."
+        },
     )
     use_auth_token: bool = field(
         default=False,
@@ -223,7 +244,13 @@ class ModelArguments:
     )
     ignore_mismatched_sizes: bool = field(
         default=False,
-        metadata={"help": "Will enable to load a pretrained model whose head dimensions are different."},
+        metadata={
+            "help": "Will enable to load a pretrained model whose head dimensions are different."
+        },
+    )
+    trust_remote_code: bool = field(
+        default=False,
+        metadata={"help": "Trust remote code (e.g. from huggingfacehub) when loading model."},
     )
 
 
@@ -236,18 +263,23 @@ def main():
     if len(sys.argv) == 2 and sys.argv[1].endswith(".json"):
         # If we pass only one argument to the script and it's the path to a json file,
         # let's parse it to get our arguments.
-        model_args, data_args, training_args = parser.parse_json_file(json_file=os.path.abspath(sys.argv[1]))
+        model_args, data_args, training_args = parser.parse_json_file(
+            json_file=os.path.abspath(sys.argv[1])
+        )
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
-    
+
     # Check for the use of early stopping
-    if data_args.patience: 
+    if data_args.patience:
         training_args.eval_steps = data_args.eval_every
         training_args.save_total_limit = 1
         training_args.load_best_model_at_end = True
         training_args.evaluation_strategy = "steps"
-        callbacks = [EarlyStoppingCallback(early_stopping_patience=data_args.patience,
-                                           early_stopping_threshold=0.001)]
+        callbacks = [
+            EarlyStoppingCallback(
+                early_stopping_patience=data_args.patience, early_stopping_threshold=0.001
+            )
+        ]
     else:
         callbacks = None
 
@@ -278,7 +310,11 @@ def main():
 
     # Detecting last checkpoint.
     last_checkpoint = None
-    if os.path.isdir(training_args.output_dir) and training_args.do_train and not training_args.overwrite_output_dir:
+    if (
+        os.path.isdir(training_args.output_dir)
+        and training_args.do_train
+        and not training_args.overwrite_output_dir
+    ):
         last_checkpoint = get_last_checkpoint(training_args.output_dir)
         if last_checkpoint is None and len(os.listdir(training_args.output_dir)) > 0:
             raise ValueError(
@@ -381,8 +417,8 @@ def main():
             label_list = raw_datasets["train"].unique("label")
             label_list.sort()  # Let's sort it for determinism
             num_labels = len(label_list)
-    
-    is_binary = (num_labels == 2)
+
+    is_binary = num_labels == 2
 
     # Load pretrained model and tokenizer
     #
@@ -395,6 +431,7 @@ def main():
         cache_dir=model_args.cache_dir,
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
+        trust_remote_code=model_args.trust_remote_code,
     )
     tokenizer = AutoTokenizer.from_pretrained(
         model_args.tokenizer_name if model_args.tokenizer_name else model_args.model_name_or_path,
@@ -402,6 +439,7 @@ def main():
         use_fast=model_args.use_fast_tokenizer,
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
+        trust_remote_code=model_args.trust_remote_code,
     )
     try:
         model = AutoModelForSequenceClassification.from_pretrained(
@@ -412,11 +450,14 @@ def main():
             revision=model_args.model_revision,
             use_auth_token=True if model_args.use_auth_token else None,
             ignore_mismatched_sizes=model_args.ignore_mismatched_sizes,
+            trust_remote_code=model_args.trust_remote_code,
         )
     except ValueError as e:
         from transformers import T5Config
+
         if isinstance(config, T5Config):
             from transformers_modified.t5 import T5ForSequenceClassification
+
             model = T5ForSequenceClassification.from_pretrained(
                 model_args.model_name_or_path,
                 from_tf=bool(".ckpt" in model_args.model_name_or_path),
@@ -428,11 +469,11 @@ def main():
             )
         else:
             raise e
-    
+
     # Freeze all parameters (including embeddings) except the classifier head
     if model_args.freeze_model:
         for name, param in model.named_parameters():
-            if "classifier" not in name and not name.startswith("score"): # classifier layer
+            if "classifier" not in name and not name.startswith("score"):  # classifier layer
                 param.requires_grad = False
 
     # Preprocessing the raw_datasets
@@ -441,7 +482,9 @@ def main():
         sentence1_key, sentence2_key = task_to_keys[data_args.task_name]
     else:
         # Again, we try to have some nice defaults but don't hesitate to tweak to your use case.
-        non_label_column_names = [name for name in raw_datasets["train"].column_names if name not in ("label", "idx")]
+        non_label_column_names = [
+            name for name in raw_datasets["train"].column_names if name not in ("label", "idx")
+        ]
         if "sentence1" in non_label_column_names and "sentence2" in non_label_column_names:
             sentence1_key, sentence2_key = "sentence1", "sentence2"
         elif "question1" in non_label_column_names and "question2" in non_label_column_names:
@@ -453,16 +496,20 @@ def main():
         elif "question" in non_label_column_names and "sentence" in non_label_column_names:
             sentence1_key, sentence2_key = "question", "sentence"
         # special cases
-        elif "paragraph" in non_label_column_names and \
-             "question" in non_label_column_names and \
-             "answer" in non_label_column_names:        # MultiRC
+        elif (
+            "paragraph" in non_label_column_names
+            and "question" in non_label_column_names
+            and "answer" in non_label_column_names
+        ):  # MultiRC
             sentence1_key, sentence2_key = ["question", "answer"], "paragraph"
             template = "Question: {} Answer: {}"
-        elif "text" in non_label_column_names and \
-             "span1_text" in non_label_column_names and \
-             "span2_text" in non_label_column_names:    # WSC
+        elif (
+            "text" in non_label_column_names
+            and "span1_text" in non_label_column_names
+            and "span2_text" in non_label_column_names
+        ):  # WSC
             sentence1_key, sentence2_key = ["span2_text", "span1_text"], "text"
-            template = "Does \"{}\" refer to \"{}\" in this passage?"
+            template = 'Does "{}" refer to "{}" in this passage?'
         else:
             if len(non_label_column_names) >= 2:
                 sentence1_key, sentence2_key = non_label_column_names[:2]
@@ -515,14 +562,17 @@ def main():
         if isinstance(sentence1_key, list):
             keya, keyb = examples[sentence1_key[0]], examples[sentence1_key[1]]
             keys1 = [template.format(ka, kb) for ka, kb in zip(keya, keyb)]
-            args = (
-                (keys1, examples[sentence2_key])
-            )
+            args = (keys1, examples[sentence2_key])
         else:
             args = (
-                (examples[sentence1_key],) if sentence2_key is None else (examples[sentence1_key], examples[sentence2_key])
+                (examples[sentence1_key],)
+                if sentence2_key is None
+                else (examples[sentence1_key], examples[sentence2_key])
             )
-        result = tokenizer(*args, padding=padding, max_length=max_seq_length, truncation=True)
+        tokenizer_kwargs = {"padding": padding, "max_length": max_seq_length, "truncation": True}
+        if "postags" in model_args.model_name_or_path:
+            tokenizer_kwargs["return_pos_tag_ids"] = True
+        result = tokenizer(*args, **tokenizer_kwargs)
 
         # Map labels to IDs (not necessary for GLUE tasks)
         if label_to_id is not None and "label" in examples:
@@ -547,12 +597,18 @@ def main():
     if training_args.do_eval:
         if "validation" not in raw_datasets and "validation_matched" not in raw_datasets:
             raise ValueError("--do_eval requires a validation dataset")
-        eval_dataset = raw_datasets["validation_matched" if data_args.task_name == "mnli" else "validation"]
+        eval_dataset = raw_datasets[
+            "validation_matched" if data_args.task_name == "mnli" else "validation"
+        ]
         if data_args.max_eval_samples is not None:
             max_eval_samples = min(len(eval_dataset), data_args.max_eval_samples)
             eval_dataset = eval_dataset.select(range(max_eval_samples))
 
-    if training_args.do_predict or data_args.task_name is not None or data_args.test_file is not None:
+    if (
+        training_args.do_predict
+        or data_args.task_name is not None
+        or data_args.test_file is not None
+    ):
         if "test" not in raw_datasets and "test_matched" not in raw_datasets:
             raise ValueError("--do_predict requires a test dataset")
         predict_dataset = raw_datasets["test_matched" if data_args.task_name == "mnli" else "test"]
@@ -584,8 +640,10 @@ def main():
         elif is_regression:
             return {"mse": ((preds - p.label_ids) ** 2).mean().item()}
         elif is_binary:
-            return {"accuracy": (preds == p.label_ids).astype(np.float32).mean().item(),
-                    "f1": f1_score(y_true=p.label_ids, y_pred=preds, average="binary")}
+            return {
+                "accuracy": (preds == p.label_ids).astype(np.float32).mean().item(),
+                "f1": f1_score(y_true=p.label_ids, y_pred=preds, average="binary"),
+            }
         else:
             return {"accuracy": (preds == p.label_ids).astype(np.float32).mean().item()}
 
@@ -597,7 +655,7 @@ def main():
         data_collator = DataCollatorWithPadding(tokenizer, pad_to_multiple_of=8)
     else:
         data_collator = None
-    
+
     if is_regression:
         training_args.metric_for_best_model = "mse"
     elif is_binary:
@@ -614,7 +672,7 @@ def main():
         compute_metrics=compute_metrics,
         tokenizer=tokenizer,
         data_collator=data_collator,
-        callbacks = callbacks,
+        callbacks=callbacks,
     )
 
     # Training
@@ -627,7 +685,9 @@ def main():
         train_result = trainer.train(resume_from_checkpoint=checkpoint)
         metrics = train_result.metrics
         max_train_samples = (
-            data_args.max_train_samples if data_args.max_train_samples is not None else len(train_dataset)
+            data_args.max_train_samples
+            if data_args.max_train_samples is not None
+            else len(train_dataset)
         )
         metrics["train_samples"] = min(max_train_samples, len(train_dataset))
 
@@ -657,7 +717,9 @@ def main():
             metrics = trainer.evaluate(eval_dataset=eval_dataset)
 
             max_eval_samples = (
-                data_args.max_eval_samples if data_args.max_eval_samples is not None else len(eval_dataset)
+                data_args.max_eval_samples
+                if data_args.max_eval_samples is not None
+                else len(eval_dataset)
             )
             metrics["eval_samples"] = min(max_eval_samples, len(eval_dataset))
 
@@ -667,7 +729,9 @@ def main():
                 combined.update(metrics)
 
             trainer.log_metrics("eval", metrics)
-            trainer.save_metrics("eval", combined if task is not None and "mnli" in task else metrics)
+            trainer.save_metrics(
+                "eval", combined if task is not None and "mnli" in task else metrics
+            )
 
     if training_args.do_predict:
         logger.info("*** Predict ***")
@@ -683,9 +747,13 @@ def main():
             # Removing the `label` columns because it contains -1 and Trainer won't like that.
             predict_dataset = predict_dataset.remove_columns("label")
             predictions = trainer.predict(predict_dataset, metric_key_prefix="predict").predictions
-            predictions = np.squeeze(predictions) if is_regression else np.argmax(predictions, axis=1)
+            predictions = (
+                np.squeeze(predictions) if is_regression else np.argmax(predictions, axis=1)
+            )
 
-            output_predict_file = os.path.join(training_args.output_dir, f"predict_results_{task}.txt")
+            output_predict_file = os.path.join(
+                training_args.output_dir, f"predict_results_{task}.txt"
+            )
             if trainer.is_world_process_zero():
                 with open(output_predict_file, "w") as writer:
                     logger.info(f"***** Predict results {task} *****")
@@ -710,6 +778,7 @@ def main():
     else:
         trainer.create_model_card(**kwargs)
     """
+
 
 def _mp_fn(index):
     # For xla_spawn (TPUs)
