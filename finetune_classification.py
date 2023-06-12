@@ -336,7 +336,7 @@ def main():
                 assert (
                     test_extension == train_extension
                 ), "`test_file` should have the same extension (csv or json) as `train_file`."
-                data_files["test"] = data_args.test_file
+                data_files["test"] = data_args.validation_file
             else:
                 raise ValueError("Need either a GLUE task or a test file for `do_predict`.")
 
@@ -602,8 +602,10 @@ def main():
         training_args.metric_for_best_model = "mse"
     elif is_binary:
         training_args.metric_for_best_model = "f1"
+        training_args.greater_is_better = True
     else:
         training_args.metric_for_best_model = "accuracy"
+        training_args.greater_is_better = True
 
     # Initialize our Trainer
     trainer = Trainer(
@@ -685,7 +687,7 @@ def main():
             predictions = trainer.predict(predict_dataset, metric_key_prefix="predict").predictions
             predictions = np.squeeze(predictions) if is_regression else np.argmax(predictions, axis=1)
 
-            output_predict_file = os.path.join(training_args.output_dir, f"predict_results_{task}.txt")
+            output_predict_file = os.path.join(training_args.output_dir, f"predict_results.json")
             if trainer.is_world_process_zero():
                 with open(output_predict_file, "w") as writer:
                     logger.info(f"***** Predict results {task} *****")

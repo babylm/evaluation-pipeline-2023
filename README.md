@@ -11,8 +11,6 @@ We also provide a [Colab demo](https://colab.research.google.com/drive/1HX2D3wzt
 
 If you have questions about or suggestions for this code, please open an issue and consider [joining our Slack](https://join.slack.com/t/babylmchallenge/shared_invite/zt-1s8el4mro-qvVO447l3POBZcUNvMWQcg). We also welcome pull requests!
 
-We adapt this primarily from the BigScience fork of [lm-eval-harness](https://github.com/bigscience-workshop/lm-evaluation-harness), originally by EleutherAI. Support for masked language models was made possible by [minicons](https://github.com/kanishkamisra/minicons)' implementation of MLM scoring (itself based on [code by Salazar et al. (2020)](https://github.com/awslabs/mlm-scoring)).
-
 ## Installation
 
 To install dependencies, run this:
@@ -65,10 +63,12 @@ Here are the defaults that we use:
 We provide a shell script that will collect your results into a single file:
 
 ```bash
-./collect_results.sh path/to/model_and_tokenizer
+./collect_results.py path/to/model_and_tokenizer
 ```
 
-We will ask you to share your results, model, and tokenizer. We will evaluate on held-out tasks (TBA) as part of the final evaluation.
+This will output a file called `all_predictions.json` in the root folder of this repository. We will ask you to upload this file to a submission portal.
+
+We will also ask you to share a link where we can download your model and tokenizer. We will evaluate on held-out tasks as part of the final evaluation.
 
 ## Baselines
 We provide a series of baseline models that we train on our strict or strict-small dataset. These are [hosted on HuggingFace](https://huggingface.co/babylm).
@@ -115,8 +115,6 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 -----------------------
 
 These are naïve baselines that are meant to provide a starting point for investigation. We look forward to seeing how you will improve upon these!
-
-We [provide the code](https://github.com/babylm/baseline-pretraining) used to train these baselines. We do not recommend using this for your own models, as it loads tokenizers from huggingface instead of training from scratch on the BabyLM data (which does not qualify for any of our tracks). That said, we found (in some quick preliminary experiments) that simply training tokenizers on the BabyLM data often outperforms these baselines!
 
 ## Citation
 If you use the datasets or code from this repository, please cite the BabyLM Call for Papers:
