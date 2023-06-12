@@ -23,7 +23,6 @@ else
     OUT_DIR=$TASK_NAME
 fi
 
-#CUDA_VISIBLE_DEVICES=`free-gpu` python finetune_classification.py \
 python finetune_classification.py \
   --model_name_or_path $MODEL_PATH \
   --output_dir $MODEL_PATH/finetune/$OUT_DIR/ \
@@ -31,6 +30,7 @@ python finetune_classification.py \
   --validation_file filter-data/glue_filtered/$TASK_NAME.$VALID_NAME.json \
   --do_train \
   --do_eval \
+  --do_predict \
   --use_fast_tokenizer False \
   --max_seq_length 128 \
   --per_device_train_batch_size $BSZ \
@@ -40,5 +40,6 @@ python finetune_classification.py \
   --patience $PATIENCE \
   --eval_every $EVAL_EVERY \
   --eval_steps $EVAL_EVERY \
+  --save_steps $EVAL_EVERY \
   --overwrite_output_dir \
   --seed $SEED
