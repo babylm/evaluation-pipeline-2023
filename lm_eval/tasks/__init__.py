@@ -310,7 +310,7 @@ def list_templates(task_name: str) -> List[str]:
 
 
 def get_templates(task_name: str) -> DatasetTemplates:
-    """Returns the `promptsource` `DatasetTemplates` for the specified task name."""
+    # Returns the `promptsource` `DatasetTemplates` for the specified task name.
     task_class = _get_task_from_registry(task_name)
     return _get_templates_from_task(task_class)
 

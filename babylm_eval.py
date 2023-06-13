@@ -32,8 +32,10 @@ if __name__ == "__main__":
                         help="Path to huggingface model and tokenizer.")
     parser.add_argument("model_type", type=str, choices=["decoder only", "decoder", "encoder only", "encoder", "encoder-decoder",],
                         help="Language model architecture.")
-    parser.add_argument("--tasks", "-t", type=str, choices=["blimp", "glue", "custom"], default="blimp",
+    parser.add_argument("--tasks", "-t", type=str, choices=["blimp", "glue"], default="blimp",
                         help="Tasks on which we evaluate.")
+    parser.add_argument("--trust_remote_code", "-r", action="store_true",
+                        help="Trust remote code (e.g. from huggingface) when loading model.")
     parser.add_argument("--num_fewshot", "-n", type=int, default=0,
                         help="Number of few-shot examples to show the model for each test example.")
     args = parser.parse_args()
@@ -43,6 +45,7 @@ if __name__ == "__main__":
                         "encoder-decoder": "hf-seq2seq",}
     eval_model = lm_eval.get_model(MODEL_TYPE_REMAP[args.model_type],
                                    pretrained=args.model_path,
+                                   trust_remote_code=args.trust_remote_code,
                                    device="cuda")
     tasks = []
     if args.tasks == "all":
