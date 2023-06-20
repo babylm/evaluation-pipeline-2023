@@ -70,6 +70,14 @@ This will output a file called `all_predictions.json` in the root folder of this
 
 We will also ask you to share a link where we can download your model and tokenizer. We will evaluate on held-out tasks as part of the final evaluation.
 
+### Format of Predictions
+If you wish to submit your results and you are not using the `collect_results.py` script, please ensure that your predictions file conforms to the submission format (example provided here as `sample_predictions.json`). This is a file consisting of line-separated JSON objects, where each line corresponds to a single subtask.
+
+For each line, the JSON object includes a `task` field ("blimp" or "glue"), a `sub_task` field (the specific task, like "cola" or "anaphor_agreement"), and a `predictions` field, which is a list of JSON objects containing example IDs and predictions for those examples. Here is an example:
+```
+{"task": "glue", "sub_task": "mnli", "predictions": [{"id": "mnli_0", "pred": 0}, {"id": "mnli_1": "pred": 1}, ..., {"id": "mnli_6561", "pred": 1}]}
+```
+
 ## Baselines
 We provide a series of baseline models that we train on our strict or strict-small dataset. These are [hosted on HuggingFace](https://huggingface.co/babylm).
 
