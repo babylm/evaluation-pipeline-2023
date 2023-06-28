@@ -11,7 +11,7 @@ grammars.
 Homepage: https://github.com/alexwarstadt/blimp
 """
 from lm_eval.api.task import PromptSourceTask
-from typing import Optional
+from typing import Optional, List
 from datasets import load_dataset
 
 
@@ -50,6 +50,30 @@ class BlimpTask(PromptSourceTask):
         # trained on this data.
         return self.dataset["train"]
 
+    def null_prompt_doc_to_text(self, doc: dict) -> str:
+        return ""
+
+    def null_prompt_doc_to_target(self, doc: dict) -> List[str]:
+        correct_choice = doc["sentence_good"]
+        return [correct_choice]
+
+    def null_prompt_answer_choices(self, doc: dict) -> List[str]:
+        choices = [doc["sentence_good"], doc["sentence_bad"]]
+        return choices
+
+    def null_prompt_get_logging_info(self):
+        return {
+            "fixed_answer_choice_list": None,
+            "dataset_path": self.DATASET_PATH,
+            "dataset_name": self.DATASET_NAME,
+            "subset": self.SPLIT,
+            "prompt_name": None,
+            "prompt_id": None,
+            "prompt_jinja": None,
+            "prompt_original_task": f"{self.DATASET_PATH}/{self.DATASET_NAME}",
+            # Placeholder for comment in post-processing.
+            "comment": "",
+        }
 
 class BlimpAdjunctIsland(BlimpTask):
     DATASET_NAME = "adjunct_island"

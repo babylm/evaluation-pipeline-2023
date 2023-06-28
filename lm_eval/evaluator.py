@@ -120,6 +120,7 @@ def evaluate(
     bootstrap_iters: Optional[int] = 100000,
     seed: Optional[int] = DEFAULT_SEED,
     limit: Optional[int] = None,
+    predictions_path: Optional[str] = None,
 ) -> dict:
     """Instantiate and evaluate a model on a list of tasks.
 
@@ -178,7 +179,7 @@ def evaluate(
 
         logger.info(f"\n» Filtering invalid docs from '{task_template_key}'")
         task_docs = task_docs.filter(lambda d: not task.invalid_doc_for_prompt(d))
-        task_docs = task_docs.shuffle(generator=rng)
+        # task_docs = task_docs.shuffle(generator=rng)
 
         logger.info(f"\n» Constructing '{task_template_key}' contexts and requests")
         pbar_limit = len(task_docs) if not limit else np.minimum(limit, len(task_docs))
@@ -229,6 +230,8 @@ def evaluate(
             )
 
     # Unpack results and sort back in order and return control to Task
+    if predictions_path:
+        preds = []
     vals = collections.defaultdict(list)
     example_logger = logging.getLogger("examples")
     for (task_template_key, doc_id), per_doc_requests in process_response_queue.items():
@@ -243,6 +246,7 @@ def evaluate(
 
         if task.save_examples:
             metrics, example = output
+            preds.append(example["pred"])
             example.update(fewshot_logging_info)
             example.update(task.get_logging_info())
             example_logger.info(json.dumps(example))
@@ -255,6 +259,12 @@ def evaluate(
         for metric, value in metrics.items():
             vals[(task_template_key, metric)].append(value)
 
+    if predictions_path:
+        with open(predictions_path, 'w') as preds_file:
+            preds_file.write("index\tprediction\n")
+            for index, prediction in enumerate(preds):
+                preds_file.write(f"{index}\t{prediction}\n")
+    
     # Aggregate results
     metric_results = []
     for (task_template_key, metric), items in vals.items():
