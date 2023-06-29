@@ -31,7 +31,7 @@ Unzip the dataset into the root directory of this repository: `unzip filter_data
 
 ## Usage
 ### Zero-shot Evaluation
-To evaluate a model on zero-shot tasks like BLiMP:
+To evaluate a model on zero-shot tasks like BLiMP and the held-out BLiMP supplement tasks:
 
 ```bash
 python babylm_eval.py 'path/to/model_and_tokenizer' 'model_type'
@@ -40,7 +40,7 @@ python babylm_eval.py 'path/to/model_and_tokenizer' 'model_type'
 Where `model_type` is one of "encoder", "decoder" or "encoder-decoder".
 
 ### Fine-tuning
-To fine-tune and evaluate a model on tasks that require fine-tuning, like the (Super)GLUE tasks:
+To fine-tune and evaluate a model on tasks that require fine-tuning, like the (Super)GLUE tasks or MSGS:
 
 ```bash
 ./finetune_all_tasks.sh 'path/to/model_and_tokenizer'
@@ -73,7 +73,7 @@ We will also ask you to share a link where we can download your model and tokeni
 ### Format of Predictions
 If you wish to submit your results and you are not using the `collect_results.py` script, please ensure that your predictions file conforms to the submission format (example provided here as `sample_predictions.json`). This is a file consisting of line-separated JSON objects, where each line corresponds to a single subtask.
 
-For each line, the JSON object includes a `task` field ("blimp" or "glue"), a `sub_task` field (the specific task, like "cola" or "anaphor_agreement"), and a `predictions` field, which is a list of JSON objects containing example IDs and predictions for those examples. Here is an example:
+For each line, the JSON object includes a `task` field ("blimp", "glue", "supplement", or "msgs"), a `sub_task` field (the specific task, like "cola" or "anaphor_agreement"), and a `predictions` field, which is a list of JSON objects containing example IDs and predictions for those examples. Here is an example:
 ```
 {"task": "glue", "sub_task": "mnli", "predictions": [{"id": "mnli_0", "pred": 0}, {"id": "mnli_1": "pred": 1}, ..., {"id": "mnli_6561", "pred": 1}]}
 ```
