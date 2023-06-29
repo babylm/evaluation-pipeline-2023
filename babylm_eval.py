@@ -4,12 +4,12 @@ import os
 import json
 
 TASKS = {
-    "glue":  ["cola", "sst", "mrpc", "qqp", "mnli", "mnli_mismatched", "qnli", "rte",
-              "boolq", "multirc", "wsc"],
     "blimp": ["anaphor_agreement.json", "argument_structure.json", "binding.json",
               "control_raising.json", "determiner_noun_agreement.json", "ellipsis.json",
               "filler_gap.json", "irregular_forms.json", "island_effects.json",
               "npi_licensing.json", "quantifiers.json", "subject_verb_agreement.json"],
+    "supplement": ["hypernym.json", "qa_congruence_easy.json", "qa_congruence_tricky.json",
+               "subject_aux_inversion.json", "turn_taking.json"]
 }
 
 
@@ -32,7 +32,7 @@ if __name__ == "__main__":
                         help="Path to huggingface model and tokenizer.")
     parser.add_argument("model_type", type=str, choices=["decoder only", "decoder", "encoder only", "encoder", "encoder-decoder",],
                         help="Language model architecture.")
-    parser.add_argument("--tasks", "-t", type=str, choices=["blimp", "glue"], default="blimp",
+    parser.add_argument("--tasks", "-t", type=str, choices=["blimp", "supplement", "all"], default="all",
                         help="Tasks on which we evaluate.")
     parser.add_argument("--trust_remote_code", "-r", action="store_true",
                         help="Trust remote code (e.g. from huggingface) when loading model.")
@@ -61,13 +61,10 @@ if __name__ == "__main__":
             template = None
             task_title = task.split(".json")[0]
             task = f"blimp_from_file:filter-data/blimp_filtered/{task}"
-        elif task in TASKS["glue"]:
-            template = lm_eval.list_templates(task)[0]
-            task_title = task
-            if task_title == "mnli_mismatched":
-                task = f"{task_title}:filter-data/glue_filtered/mnli"
-            else:
-                task = f"{task}:filter-data/glue_filtered/{task}"
+        elif task in TASKS["supplement"]:
+            template = None
+            task_title = task.split(".json")[0]
+            task = f"blimp_from_file:filter-data/supplement_filtered/{task}"
         else:
             raise ValueError("Unrecognized task!")
         accuracies[task_title] = accuracy_on_task(task, eval_model, template,

@@ -330,15 +330,20 @@ def main():
         # Get the test dataset: you can provide your own CSV/JSON test file (see below)
         # when you use `do_predict` without specifying a GLUE benchmark task.
         if training_args.do_predict:
-            if data_args.validation_file is not None:
+            if data_args.test_file is not None:
                 train_extension = data_args.train_file.split(".")[-1]
-                test_extension = data_args.validation_file.split(".")[-1]
+                test_extension = data_args.test_file.split(".")[-1]
                 assert (
                     test_extension == train_extension
                 ), "`test_file` should have the same extension (csv or json) as `train_file`."
-                data_files["test"] = data_args.validation_file
+                data_files["test"] = data_args.test_file
             else:
-                raise ValueError("Need either a GLUE task or a test file for `do_predict`.")
+                train_extension = data_args.train_file.split(".")[-1]
+                validation_extension = data_args.validation_file.split(".")[-1]
+                assert (
+                    validation_extension == train_extension
+                ), "`validation_file` should have the same extension (csv or json) as `train_file`."
+                data_files["test"] = data_args.validation_file
 
         for key in data_files.keys():
             logger.info(f"load a local file for {key}: {data_files[key]}")
@@ -463,6 +468,8 @@ def main():
              "span2_text" in non_label_column_names:    # WSC
             sentence1_key, sentence2_key = ["span2_text", "span1_text"], "text"
             template = "Does \"{}\" refer to \"{}\" in this passage?"
+        elif "sentence" in non_label_column_names and "linguistic_feature_type" in non_label_column_names:
+            sentence1_key, sentence2_key = "sentence", None
         else:
             if len(non_label_column_names) >= 2:
                 sentence1_key, sentence2_key = non_label_column_names[:2]
@@ -675,29 +682,28 @@ def main():
         logger.info("*** Predict ***")
 
         # Loop to handle MNLI double evaluation (matched, mis-matched)
+        # We do not use MNLI test data.
         tasks = [data_args.task_name]
-        predict_datasets = [predict_dataset]
         if data_args.task_name == "mnli":
             tasks.append("mnli-mm")
             predict_datasets.append(raw_datasets["test_mismatched"])
 
-        for predict_dataset, task in zip(predict_datasets, tasks):
-            # Removing the `label` columns because it contains -1 and Trainer won't like that.
-            predict_dataset = predict_dataset.remove_columns("label")
-            predictions = trainer.predict(predict_dataset, metric_key_prefix="predict").predictions
-            predictions = np.squeeze(predictions) if is_regression else np.argmax(predictions, axis=1)
+        # Removing the `label` columns because it contains -1 and Trainer won't like that.
+        predict_dataset = predict_dataset.remove_columns("label")
+        predictions = trainer.predict(predict_dataset, metric_key_prefix="predict").predictions
+        predictions = np.squeeze(predictions) if is_regression else np.argmax(predictions, axis=1)
 
-            output_predict_file = os.path.join(training_args.output_dir, f"predict_results.json")
-            if trainer.is_world_process_zero():
-                with open(output_predict_file, "w") as writer:
-                    logger.info(f"***** Predict results {task} *****")
-                    writer.write("index\tprediction\n")
-                    for index, item in enumerate(predictions):
-                        if is_regression:
-                            writer.write(f"{index}\t{item:3.3f}\n")
-                        else:
-                            item = label_list[item]
-                            writer.write(f"{index}\t{item}\n")
+        output_predict_file = os.path.join(training_args.output_dir, f"predict_results.txt")
+        if trainer.is_world_process_zero():
+            with open(output_predict_file, "w") as writer:
+                logger.info(f"***** Predict results *****")
+                writer.write("index\tprediction\n")
+                for index, item in enumerate(predictions):
+                    if is_regression:
+                        writer.write(f"{index}\t{item:3.3f}\n")
+                    else:
+                        item = label_list[item]
+                        writer.write(f"{index}\t{item}\n")
 
     kwargs = {"finetuned_from": model_args.model_name_or_path, "tasks": "text-classification"}
     if data_args.task_name is not None:
