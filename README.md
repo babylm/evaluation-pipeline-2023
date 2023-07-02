@@ -5,7 +5,7 @@
 
 This code provides the backend for the BabyLM Challenge's evaluation pipeline. 
 
-We provide support for zero-shot evaluations on BLiMP, as well as scripts for fine-tuning HuggingFace-based models on GLUE tasks.
+We provide support for zero-shot evaluations on BLiMP, as well as scripts for fine-tuning HuggingFace-based models on GLUE and MSGS tasks.
 
 We also provide a [Colab demo](https://colab.research.google.com/drive/1HX2D3wztO81tKcqCeV_ecRcEUseBVuTc?usp=sharing) of the evaluation pipeline as a demonstration of how to use the code.
 
@@ -25,7 +25,7 @@ pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --e
 If your GPU is compatible with CUDA 10, replace all instances of `cu113` with `cu102`.
 
 ### Data
-We provide versions of BLiMP and GLUE which have been filtered according to the vocabulary of the `strict-small` dataset. We filter for examples where each word has appeared in our training set at least twice.
+We provide versions of BLiMP, GLUE, and MSGS which have been filtered according to the vocabulary of the `strict-small` dataset. We filter for examples where each word has appeared in our training set at least twice.
 
 Unzip the dataset into the root directory of this repository: `unzip filter_data.zip`.
 
@@ -40,7 +40,7 @@ python babylm_eval.py 'path/to/model_and_tokenizer' 'model_type'
 Where `model_type` is one of "encoder", "decoder" or "encoder-decoder".
 
 ### Fine-tuning
-To fine-tune and evaluate a model on tasks that require fine-tuning, like the (Super)GLUE tasks or MSGS:
+To fine-tune and evaluate a model on tasks that require fine-tuning, like the (Super)GLUE tasks or held-out MSGS tasks:
 
 ```bash
 ./finetune_all_tasks.sh 'path/to/model_and_tokenizer'
