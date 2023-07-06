@@ -10,8 +10,6 @@ EVAL_EVERY=${7:-200}    # default: 200
 MAX_EPOCHS=${8:-10}     # default: 10
 SEED=${9:-12}           # default: 12
 
-mkdir -p $MODEL_PATH/finetune/$TASK_NAME/
-
 if [[ "$SUBTASK_NAME" = "mnli" ]]; then
     VALID_NAME="validation_matched"
     OUT_DIR="mnli"
@@ -23,6 +21,8 @@ else
     VALID_NAME="validation"
     OUT_DIR=$SUBTASK_NAME
 fi
+
+mkdir -p $MODEL_PATH/finetune/$OUT_DIR/
 
 python finetune_classification.py \
   --model_name_or_path $MODEL_PATH \
