@@ -8,8 +8,13 @@ EVAL_EVERY=${5:-200}
 MAX_EPOCHS=${6:-10}
 SEED=${7:-12}
 
-# use default hyperparameters
-for task in {"cola","sst2","mrpc","qqp","mnli","mnli-mm","qnli","rte","boolq","multirc","wsc"}; do
-    # qsub -q g.q -cwd -j y -l hostname="b1[123456789]|c0*|c1[13456789],ram_free=10G,mem_free=10G,gpu=1" finetune_model.sh $MODEL_PATH $task
-	./finetune_model.sh $MODEL_PATH $task $LR $PATIENCE $BSZ $EVAL_EVERY $MAX_EPOCHS $SEED
+# Fine-tune and evaluate on (Super)GLUE tasks
+# If your system uses sbatch or qsub, consider using that to parallelize calls to finetune_model.sh
+for subtask in {"cola","sst2","mrpc","qqp","mnli","mnli-mm","qnli","rte","boolq","multirc","wsc"}; do
+    ./finetune_model.sh $MODEL_PATH glue $subtask $LR $PATIENCE $BSZ $EVAL_EVERY $MAX_EPOCHS $SEED
+done
+
+# Fine-tune and evaluate on MSGS tasks
+for subtask in {"main_verb_control","control_raising_control","syntactic_category_control","lexical_content_the_control","relative_position_control","main_verb_lexical_content_the","main_verb_relative_token_position","syntactic_category_lexical_content_the","syntactic_category_relative_position","control_raising_lexical_content_the","control_raising_relative_token_position"}; do
+	./finetune_model.sh $MODEL_PATH msgs $subtask $LR $PATIENCE $BSZ $EVAL_EVERY $MAX_EPOCHS $SEED
 done
