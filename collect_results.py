@@ -18,6 +18,11 @@ TASKS = {
 }
 
 def make_task_dict(task_name, preds_path):
+    def _add_to_dict(index, prediction, task_dict):
+        example_id = f"{task_name}_{index}"
+        prediction = prediction.replace("\\n", "\n")
+        task_dict["predictions"].append({"id": example_id, "pred": prediction})
+
     if task_name in TASKS["glue"]:
         task_type = "glue"
     elif task_name in TASKS["blimp"]:
@@ -37,11 +42,19 @@ def make_task_dict(task_name, preds_path):
         # skip header
         next(predictions_file)
         # collect predictions with ids
+        index = None
+        prediction = None
         for line in predictions_file:
-            index, prediction = line.strip().split("\t")
-            prediction = prediction.replace("\\n", "\n")
-            example_id = f"{task_name}_{index}"
-            task_dict["predictions"].append({"id": example_id, "pred": prediction})
+            if "\t" in line:
+                # add to prediction list
+                if prediction:
+                    _add_to_dict(index, prediction, task_dict)
+                # start new prediction
+                index, prediction = line.strip().split("\t")
+            else:
+                prediction += "\n" + line.strip()
+        # handle final prediction
+        _add_to_dict(index, prediction, task_dict)
 
     return task_dict
 
