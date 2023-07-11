@@ -34,6 +34,8 @@ if __name__ == "__main__":
                         help="Language model architecture.")
     parser.add_argument("--tasks", "-t", type=str, choices=["blimp", "supplement", "all"], default="all",
                         help="Tasks on which we evaluate.")
+    parser.add_argument("--run_aoa", "-a", action="store_true",
+                        help="Will run the additional AoA prediction task.")
     parser.add_argument("--trust_remote_code", "-r", action="store_true",
                         help="Trust remote code (e.g. from huggingface) when loading model.")
     parser.add_argument("--num_fewshot", "-n", type=int, default=0,
@@ -82,3 +84,14 @@ if __name__ == "__main__":
     print("\nScores:")
     for task in accuracies.keys():
         print(f"{task}:\t{accuracies[task] * 100:.2f}%")
+
+    if args.run_aoa:
+        # Run AoA prediction evaluation
+        word_surprisals_n, mad_results = lm_eval.aoa_pred_eval(eval_model.model, eval_model.tokenizer, MODEL_TYPE_REMAP[args.model_type], batch_size = 32)
+        out_dir = os.path.join(args.model_path, "aoa_prediction")
+        if not os.path.exists(out_dir):
+            os.makedirs(out_dir)
+        with open(os.path.join(out_dir, "extracted_average_surprisals.json") , 'w') as out_file:
+            json.dump(word_surprisals_n, out_file)
+        with open(os.path.join(out_dir, "mean_absolute_deviation_results.json"), 'w') as out_file:
+            json.dump(mad_results, out_file)

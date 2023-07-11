@@ -1,0 +1,592 @@
+language,uni_lemma,lexical_category,category,definition,word_clean,aoa,concreteness,frequency
+English (American),a,function_words,quantifiers,a,a,26.75657271813926,1.46,301773
+English (American),a,function_words,quantifiers,an,an,26.75657271813926,1.46,13508
+English (American),a lot,function_words,quantifiers,a lot,a lot,29.354943884668234,2.37,4807
+English (American),about,function_words,locations,about,about,33.56541793707104,1.77,27478
+English (American),above,function_words,locations,above,above,32.94888134846138,3.33,332
+English (American),airplane,nouns,vehicles,airplane,airplane,20.14529714809586,4.96,1192
+English (American),all,function_words,quantifiers,all,all,26.31156607337898,2.27,49585
+English (American),all gone,predicates,descriptive_words,all gone,all gone,19.106125409049845,2.04,779
+English (American),alligator,nouns,animals,alligator,alligator,25.74050182260553,4.96,404
+English (American),am,predicates,helping_predicates,am,am,29.39866638780256,1.96,4070
+English (American),and,function_words,connecting_words,and,and,27.669136574125037,1.52,217485
+English (American),animal,nouns,animals,animal,animal,24.531890826243654,4.61,1523
+English (American),ankle,nouns,body_parts,ankle,ankle,29.54373992549591,4.81,75
+English (American),another,function_words,quantifiers,another,another,28.49498165323644,2.69,14222
+English (American),ant,nouns,animals,ant,ant,24.632024173206105,4.86,182
+English (American),any,function_words,quantifiers,any,any,30.168894359149128,1.72,12098
+English (American),apple,nouns,food_drink,apple,apple,18.316415297779947,5,3736
+English (American),applesauce,nouns,food_drink,applesauce,applesauce,25.18708208845118,4.96,127
+English (American),are,function_words,helping_predicates,are,are,30.400848330016352,1.96,106583
+English (American),arm,nouns,body_parts,arm,arm,21.679117916792883,4.96,1528
+English (American),around,function_words,locations,around,around,29.73724069586142,1.96,6835
+English (American),asleep,predicates,descriptive_words,asleep,asleep,24.95132838125333,3.71,1365
+English (American),at,function_words,locations,at,at,28.44395214386389,2.07,52573
+English (American),awake,predicates,descriptive_words,awake,awake,26.406667306484906,3.32,362
+English (American),away,function_words,locations,away,away,27.268694284819865,2.23,11014
+English (American),back (location),function_words,locations,back,back,26.041013448918488,4.33,26533
+English (American),bad,predicates,descriptive_words,bad,bad,24.376033345405514,1.68,2576
+English (American),ball,nouns,toys,ball,ball,14.051831559140178,5,8382
+English (American),balloon,nouns,toys,balloon,balloon,17.252991342080126,4.92,1810
+English (American),banana,nouns,food_drink,banana,banana,16.787250784202772,5,1615
+English (American),basement,nouns,furniture_rooms,basement,basement,31.403406659378565,4.89,121
+English (American),basket,nouns,household,basket,basket,25.32137110090939,5,1734
+English (American),bat,nouns,toys,bat,bat,25.94740000625428,5,384
+English (American),bathroom,nouns,furniture_rooms,bathroom,bathroom,23.22834292081228,4.52,1059
+English (American),bathtub,nouns,furniture_rooms,bathtub,bathtub,21.86077443068652,4.92,410
+English (American),be,function_words,helping_predicates,be,be,30.344096265123305,1.85,41097
+English (American),beach,nouns,outside,beach,beach,26.078273320304067,4.79,991
+English (American),beads,nouns,clothing,beads,beads,29.819752587655973,4.9,546
+English (American),beans,nouns,food_drink,beans,beans,24.532090787380607,5,1249
+English (American),bear,nouns,animals,bear,bear,19.290426322598368,4.88,5220
+English (American),because,function_words,connecting_words,because,because,30.412366644638137,1.22,31730
+English (American),bed,nouns,furniture_rooms,bed,bed,20.494046155718603,5,7584
+English (American),bedroom,nouns,furniture_rooms,bedroom,bedroom,25.645644681903754,4.9,1119
+English (American),bee,nouns,animals,bee,bee,21.306296871726428,4.88,1475
+English (American),behind,function_words,locations,behind,behind,29.581051780523048,3.48,2954
+English (American),belly button,nouns,body_parts,belly button,belly button,20.62619109370771,5,90
+English (American),belt,nouns,clothing,belt,belt,25.39428676791078,4.9,307
+English (American),bench,nouns,furniture_rooms,bench,bench,31.122752354523378,4.87,241
+English (American),beside,function_words,locations,beside,beside,33.68775817791739,2.59,304
+English (American),better,predicates,descriptive_words,better,better,27.197801378663197,1.91,9742
+English (American),bib,nouns,clothing,bib,bib,23.648183674597796,4.79,639
+English (American),bicycle,nouns,vehicles,bicycle,bicycle,21.77871249104521,4.89,660
+English (American),big,predicates,descriptive_words,big,big,22.25931777062911,3.66,25182
+English (American),bird,nouns,animals,bird,bird,17.224492119324236,5,2517
+English (American),bite,predicates,action_words,bite,bite,21.93843222383973,4.44,2541
+English (American),black,predicates,descriptive_words,black,black,26.65032453394826,3.76,2775
+English (American),blanket,nouns,household,blanket,blanket,20.364584241108936,5,957
+English (American),block,nouns,toys,block,block,21.47767824557252,4.48,1117
+English (American),blow,predicates,action_words,blow,blow,24.100630216525534,3.74,2110
+English (American),blue,predicates,descriptive_words,blue,blue,23.520465305593365,3.76,9232
+English (American),boat,nouns,vehicles,boat,boat,20.384388304955454,4.93,2544
+English (American),book,nouns,toys,book,book,16.378840412498462,4.9,15413
+English (American),boots,nouns,clothing,boots,boots,22.762953333636315,5,792
+English (American),bottle,nouns,household,bottle,bottle,18.109441114425163,4.91,3023
+English (American),bowl,nouns,household,bowl,bowl,22.67450309415727,4.87,1967
+English (American),box,nouns,household,box,box,22.36283488674821,4.9,8714
+English (American),bread,nouns,food_drink,bread,bread,21.714838666180317,4.92,2959
+English (American),break,predicates,action_words,break,break,24.498575833372556,3.71,2940
+English (American),bring,predicates,action_words,bring,bring,27.00190998469981,2.55,5164
+English (American),broken,predicates,descriptive_words,broken,broken,23.262899073559634,4.11,2733
+English (American),broom,nouns,household,broom,broom,23.51056906797502,4.89,282
+English (American),brown,predicates,descriptive_words,brown,brown,27.44722287259727,4.48,2294
+English (American),brush (object),nouns,household,brush,brush,21.812402640756495,4.54,2162
+English (American),bubbles,nouns,toys,bubbles,bubbles,18.447326266810368,4.6,1229
+English (American),bucket,nouns,household,bucket,bucket,26.11855610121108,4.96,896
+English (American),bug,nouns,animals,bug,bug,21.45346928441042,5,653
+English (American),build,predicates,action_words,build,build,27.561167006392587,3.71,2552
+English (American),bump,predicates,action_words,bump,bump,25.507631046994266,4.1,1008
+English (American),bunny,nouns,animals,bunny,bunny,20.465056141535673,4.97,2386
+English (American),bus,nouns,vehicles,bus,bus,21.261211792115443,4.9,3774
+English (American),but,function_words,connecting_words,but,but,32.30802214785319,2.04,34537
+English (American),butter,nouns,food_drink,butter,butter,24.566501758151283,4.9,1358
+English (American),butterfly,nouns,animals,butterfly,butterfly,23.47450828971274,4.93,882
+English (American),button,nouns,clothing,button,button,22.084011296770807,4.96,1602
+English (American),buy,predicates,action_words,buy,buy,27.61820820612325,3.35,3593
+English (American),by,function_words,locations,by,by,28.916261166336813,1.55,5847
+English (American),cake,nouns,food_drink,cake,cake,21.93745596797483,4.81,3506
+English (American),camera,nouns,household,camera,camera,25.73750398456283,5,1185
+English (American),can (auxiliary),function_words,helping_predicates,can (auxiliary),can,27.82698008632811,4.55,175734
+English (American),can (object),nouns,household,can (object),can,26.84891293682625,4.55,175734
+English (American),candy,nouns,food_drink,candy,candy,22.10696542716163,4.83,704
+English (American),car,nouns,vehicles,car,car,17.53434303192908,4.89,13476
+English (American),careful,predicates,descriptive_words,careful,careful,26.43412690050291,1.86,6107
+English (American),carrots,nouns,food_drink,carrots,carrots,24.037122543158606,5,802
+English (American),carry,predicates,action_words,carry,carry,25.681963506798628,4.04,1148
+English (American),cat,nouns,animals,cat,cat,17.67814164845057,4.86,5835
+English (American),catch,predicates,action_words,catch,catch,25.556075994667953,4.11,2813
+English (American),cereal,nouns,food_drink,cereal,cereal,22.086966073355658,4.83,1034
+English (American),chair,nouns,furniture_rooms,chair,chair,20.747062695367397,4.58,6382
+English (American),chalk,nouns,toys,chalk,chalk,27.572948668482248,4.9,246
+English (American),chase,predicates,action_words,chase,chase,28.40000722125352,3.48,251
+English (American),cheek,nouns,body_parts,cheek,cheek,23.639051249460564,4.83,159
+English (American),cheerios,nouns,food_drink,cheerios,cheerios,23.30250911956345,4.35,59
+English (American),cheese,nouns,food_drink,cheese,cheese,18.35624365220089,4.7,4215
+English (American),chicken (animal),nouns,animals,chicken (animal),chicken,22.94116221978306,4.8,5636
+English (American),chicken (food),nouns,food_drink,chicken (food),chicken,22.755311666095626,4.8,5636
+English (American),chin,nouns,body_parts,chin,chin,23.932790792488237,4.89,444
+English (American),chips,nouns,food_drink,potato chip,potato chip,23.914163430448284,4.9,23
+English (American),chocolate,nouns,food_drink,chocolate,chocolate,25.207246056049254,4.72,2469
+English (American),church,nouns,outside,church*,church,26.377623217552873,4.9,547
+English (American),clap,predicates,action_words,clap,clap,23.57129610232303,4.16,1106
+English (American),clean (action),predicates,action_words,clean (action),clean,24.56600009616096,3.07,7338
+English (American),clean (description),predicates,descriptive_words,clean (description),clean,24.16485158037349,3.07,7338
+English (American),climb,predicates,action_words,climb,climb,25.941366782032414,4.11,1076
+English (American),clock,nouns,household,clock,clock,22.729118690605997,5,1709
+English (American),close,predicates,action_words,close,close,24.612899480281406,3.2,3138
+English (American),closet,nouns,furniture_rooms,closet,closet,26.33273273898802,4.83,289
+English (American),cloud,nouns,outside,cloud,cloud,25.68327028006053,4.54,273
+English (American),coat,nouns,clothing,coat,coat,22.77758807471102,4.97,1191
+English (American),coffee,nouns,food_drink,coffee,coffee,24.733868049413292,4.81,2249
+English (American),coke,nouns,food_drink,coke,coke,28.250686610987113,4.83,184
+English (American),cold,predicates,descriptive_words,cold,cold,20.986347269894612,3.85,3891
+English (American),comb (object),nouns,household,comb,comb,24.521530115219505,5,639
+English (American),cook,predicates,action_words,cook,cook,25.20950610885458,4.32,1634
+English (American),cookie,nouns,food_drink,cookie,cookie,18.05879104299356,5,2651
+English (American),corn,nouns,food_drink,corn,corn,23.75808620462897,4.96,769
+English (American),couch,nouns,furniture_rooms,couch,couch,24.81633921615295,4.71,505
+English (American),could,function_words,helping_predicates,could,could,33.0915181485895,1.34,12880
+English (American),cover (action),predicates,action_words,cover,cover,28.093896291699608,4.23,902
+English (American),cow,nouns,animals,cow,cow,20.23330616534318,4.96,3496
+English (American),cracker,nouns,food_drink,cracker,cracker,19.128739975548182,4.96,471
+English (American),crayon,nouns,toys,crayon,crayon,22.958268446308498,4.87,1010
+English (American),crib,nouns,furniture_rooms,crib,crib,25.54633696377014,4.86,306
+English (American),cry,predicates,action_words,cry,cry,22.833033348617004,4,1408
+English (American),cup,nouns,household,cup,cup,19.458761353171624,5,5361
+English (American),cut,predicates,action_words,cut,cut,26.834383653830635,4.55,3650
+English (American),cute,predicates,descriptive_words,cute,cute,26.878579973455473,2.76,1371
+English (American),dance,predicates,action_words,dance,dance,23.594173710650814,4.32,1107
+English (American),dark,predicates,descriptive_words,dark,dark,26.374254558849202,4.29,1494
+English (American),deer,nouns,animals,deer,deer,26.28895723853603,4.86,374
+English (American),diaper,nouns,clothing,diaper,diaper,19.45888352722782,4.82,1072
+English (American),did,function_words,helping_predicates,did/did ya,did,28.236905169713484,2.45,57888
+English (American),dirty,predicates,descriptive_words,dirty,dirty,22.183512254438906,4.23,2706
+English (American),dish,nouns,household,dish,dish,26.369638755777036,4.9,312
+English (American),do,function_words,helping_predicates,do,do,24.418127084458625,2.46,157341
+English (American),does,function_words,helping_predicates,does,does,31.321420112088582,2.24,30079
+English (American),dog,nouns,animals,dog,dog,14.594052719227676,4.85,5509
+English (American),doll,nouns,toys,doll,doll,21.41564709887175,5,1830
+English (American),don't,function_words,helping_predicates,don't,dont,25.29034229368797,2.46,89665
+English (American),donkey,nouns,animals,donkey,donkey,27.89414096656381,5,575
+English (American),donut,nouns,food_drink,donut,donut,26.088004339085252,4.93,98
+English (American),door,nouns,furniture_rooms,door,door,20.2792407612697,4.81,6193
+English (American),down,function_words,locations,down,down,19.778758085736765,3.52,31240
+English (American),draw,predicates,action_words,draw,draw,26.127344086880825,3.97,4917
+English (American),drawer,nouns,furniture_rooms,drawer,drawer,27.477050929051146,4.67,511
+English (American),dress (object),nouns,clothing,dress (object),dress,25.175475858275057,4.93,2087
+English (American),drink (action),predicates,action_words,drink (action),drink,21.405832133186447,3.77,12546
+English (American),drink (beverage),nouns,food_drink,drink (beverage),drink,21.12191463243953,4.76,12546
+English (American),drive,predicates,action_words,drive,drive,24.75429950810191,3.86,1883
+English (American),drop,predicates,action_words,drop,drop,26.14791694487336,4.21,1105
+English (American),dry (action),predicates,action_words,dry (action),dry,26.69818180786187,3.77,3410
+English (American),dry (description),predicates,descriptive_words,dry (description),dry,26.486133398623007,3.77,3410
+English (American),dryer,nouns,furniture_rooms,dryer,dryer,27.940244672930877,4.79,93
+English (American),duck,nouns,animals,duck,duck,17.185401989712528,4.86,2872
+English (American),dump,predicates,action_words,dump,dump,29.574191643049147,3.93,626
+English (American),each,function_words,quantifiers,each,each,34.433173955126186,2.03,1275
+English (American),ear,nouns,body_parts,ear,ear,18.42450761164981,5,1260
+English (American),eat,predicates,action_words,eat,eat,19.996890077067878,4.44,18091
+English (American),egg,nouns,food_drink,egg,egg,22.122988028871536,4.97,2550
+English (American),elephant,nouns,animals,elephant,elephant,23.021554163445344,5,2858
+English (American),empty,predicates,descriptive_words,empty,empty,26.56355703829002,3.43,1237
+English (American),every,function_words,quantifiers,every,every,32.62625782784631,2.28,1932
+English (American),eye,nouns,body_parts,eye,eye,17.19831986641664,4.9,1696
+English (American),face,nouns,body_parts,face,face,23.386576805200583,4.87,4356
+English (American),fall,predicates,action_words,fall,fall,23.05658646359307,4.04,4547
+English (American),fast,predicates,descriptive_words,fast,fast,26.397899335243192,3.32,1814
+English (American),feed,predicates,action_words,feed,feed,27.04318304347576,4.17,1696
+English (American),find,predicates,action_words,find,find,25.911291431365097,2.63,11096
+English (American),fine,predicates,descriptive_words,fine,fine,30.348259169087953,2.61,1791
+English (American),finger,nouns,body_parts,finger,finger,21.846032665491855,5,2157
+English (American),finish,predicates,action_words,finish,finish,28.14761497515676,2.89,2774
+English (American),firetruck,nouns,vehicles,firetruck,firetruck,24.716233162853985,5,149
+English (American),first,predicates,descriptive_words,first,first,28.530149212482925,2.76,8389
+English (American),fish (animal),nouns,animals,fish (animal),fish,18.978116085220503,5,9298
+English (American),fish (food),nouns,food_drink,fish (food),fish,22.085905665472275,5,9298
+English (American),fit,predicates,action_words,fit,fit,29.08064200730688,2.7,3997
+English (American),fix,predicates,action_words,fix,fix,25.32658824937031,2.93,2929
+English (American),flag,nouns,outside,flag,flag,26.39411115381629,4.79,236
+English (American),flower,nouns,outside,flower,flower,20.519981351232357,5,1361
+English (American),food,nouns,food_drink,food,food,23.490400956729655,4.8,6233
+English (American),foot,nouns,body_parts,foot,foot,20.351627730476352,4.9,3505
+English (American),for,function_words,locations,for,for,29.21964285739064,1.63,60043
+English (American),fork,nouns,household,fork,fork,21.912707160579416,4.9,782
+English (American),french fries,nouns,food_drink,french fries,french fries,22.485372598777225,4.87,111
+English (American),frog,nouns,animals,frog,frog,22.53087514553091,5,1734
+English (American),full,predicates,descriptive_words,full,full,27.307650021326054,3.59,1585
+English (American),game,nouns,toys,game,game,26.558324042448465,4.5,2813
+English (American),garage,nouns,furniture_rooms,garage,garage,26.95193574573295,4.96,1135
+English (American),garbage,nouns,household,garbage,garbage,25.263290629707857,4.69,493
+English (American),garden,nouns,outside,garden,garden,28.814903721740233,4.73,1711
+English (American),gentle,predicates,descriptive_words,gentle,gentle,27.53063486592105,2.53,955
+English (American),get,predicates,action_words,get,get,24.203818250784888,2.38,55665
+English (American),giraffe,nouns,animals,giraffe,giraffe,24.848340134105648,4.73,1156
+English (American),give,predicates,action_words,give,give,26.131793055183277,2.83,13726
+English (American),glass,nouns,household,glass,glass,25.377947756405593,4.82,1069
+English (American),glasses,nouns,household,glasses,glasses,23.382539516196495,4.9,985
+English (American),gloves,nouns,clothing,gloves,gloves,27.24887506361188,4.97,339
+English (American),glue,nouns,toys,glue,glue,29.779166021342032,4.65,672
+English (American),go,predicates,action_words,go,go,19.73419022328145,3.15,83559
+English (American),good,predicates,descriptive_words,good,good,23.555059836026327,1.64,42780
+English (American),goose,nouns,animals,goose,goose,26.868415336421975,4.81,522
+English (American),grapes,nouns,food_drink,grapes,grapes,21.87000053388467,5,1148
+English (American),grass,nouns,outside,grass,grass,23.421522474544503,4.93,1407
+English (American),green,predicates,descriptive_words,green,green,24.864917218093773,4.07,8568
+English (American),green beans,nouns,food_drink,green beans,green beans,28.18246325512689,4.9,224
+English (American),gum,nouns,food_drink,gum,gum,25.6705889024626,4.89,374
+English (American),hair,nouns,body_parts,hair,hair,19.550956015647447,4.97,6378
+English (American),hamburger,nouns,food_drink,hamburger,hamburger,24.060486137223638,5,565
+English (American),hammer,nouns,household,hammer,hammer,25.908134489269617,4.77,860
+English (American),hand,nouns,body_parts,hand,hand,20.888392084906826,4.72,6426
+English (American),happy,predicates,descriptive_words,happy,happy,24.111067699312272,2.56,3476
+English (American),hard,predicates,descriptive_words,hard,hard,28.34690319460537,3.76,4563
+English (American),hat,nouns,clothing,hat,hat,18.800006578327608,4.88,5643
+English (American),hate,predicates,action_words,hate,hate,32.742713404389164,1.97,285
+English (American),have,predicates,action_words,have,have,26.383343346266226,2.18,80189
+English (American),he,function_words,pronouns,he,he,28.39328352610605,3.93,85599
+English (American),head,nouns,body_parts,head,head,21.52867556120851,4.75,7286
+English (American),hear,predicates,action_words,hear,hear,27.103048512621903,3.66,6278
+English (American),heavy,predicates,descriptive_words,heavy,heavy,25.14874997804902,3.37,1182
+English (American),helicopter,nouns,vehicles,helicopter,helicopter,24.90634156578962,4.62,729
+English (American),help,predicates,action_words,help,help,22.819438880083318,2.56,8981
+English (American),hen,nouns,animals,hen,hen,29.623281978610162,4.9,378
+English (American),her,function_words,pronouns,her,her,30.0706499832329,3,32518
+English (American),here,function_words,locations,here,here,25.0324996525398,3.13,74502
+English (American),hers,function_words,pronouns,hers,hers,31.577356326543732,2.61,401
+English (American),hide,predicates,action_words,hide,hide,25.6831882822722,3.21,1461
+English (American),high,predicates,descriptive_words,high,high,27.021723647237135,3.46,1690
+English (American),high chair,nouns,furniture_rooms,high chair,high chair,25.143576833379374,4.83,177
+English (American),him,function_words,pronouns,him,him,30.171545513305684,3.54,24073
+English (American),his,function_words,pronouns,his,his,30.86529830099037,3.14,25985
+English (American),hit,predicates,action_words,hit,hit,24.176504122997176,4.11,2339
+English (American),hold,predicates,action_words,hold,hold,25.28951191411586,3.68,6702
+English (American),home,nouns,outside,home,home,21.55292850686028,4.11,9648
+English (American),horse,nouns,animals,horse,horse,20.598917207238273,5,4162
+English (American),hose,nouns,outside,hose,hose,26.925240566139266,4.87,264
+English (American),hot,predicates,descriptive_words,hot,hot,17.886174346828543,4.31,4425
+English (American),house,nouns,outside,house,house,22.949798098688984,5,12111
+English (American),how,function_words,question_words,how,how,30.185466664457547,1.35,31682
+English (American),hug,predicates,action_words,hug,hug,22.04054246795061,4.14,1172
+English (American),hungry,predicates,descriptive_words,hungry,hungry,24.529656637397714,2.9,2717
+English (American),hurry,predicates,action_words,hurry,hurry,27.48425052166916,2.63,865
+English (American),hurt (description),predicates,descriptive_words,hurt,hurt,24.88161558121455,3.61,4613
+English (American),i,function_words,pronouns,I,i,23.977441347865177,3.93,786
+English (American),ice,nouns,food_drink,ice,ice,22.358270283361815,4.89,2197
+English (American),ice cream,nouns,food_drink,ice cream,ice cream,21.580952159819738,5,1557
+English (American),if,function_words,connecting_words,if,if,34.068154850176526,1.19,31526
+English (American),in,function_words,locations,in,in,24.07962150691501,3,276036
+English (American),in,function_words,locations,inside/in,inside,24.07962150691501,3,7888
+English (American),inside,function_words,locations,inside,inside,28.910801367846076,3.67,7888
+English (American),into,function_words,locations,into,into,32.328072400666066,2.3,7862
+English (American),is,function_words,helping_predicates,is,is,28.508756906338796,1.59,183357
+English (American),it,function_words,pronouns,it,it,25.985519116000557,2.81,297679
+English (American),jacket,nouns,clothing,jacket,jacket,23.764267757552943,4.86,655
+English (American),jar,nouns,household,jar,jar,30.036814769417507,5,389
+English (American),jeans,nouns,clothing,jeans,jeans,27.85718213630826,5,160
+English (American),jelly,nouns,food_drink,jelly,jelly,26.459272534245788,4.93,851
+English (American),juice,nouns,food_drink,juice,juice,17.663424879988565,4.89,6380
+English (American),jump,predicates,action_words,jump,jump,23.05187845463102,4.52,2396
+English (American),keys,nouns,household,keys,keys,19.821178140120676,4.89,1273
+English (American),kick,predicates,action_words,kick,kick,24.607244736468125,4.33,925
+English (American),kiss,predicates,action_words,kiss,kiss,20.97729762630762,4.48,3370
+English (American),kitchen,nouns,furniture_rooms,kitchen,kitchen,23.721678813935878,4.97,2439
+English (American),kitty,nouns,animals,kitty,kitty,17.76353044822186,4.97,2807
+English (American),knee,nouns,body_parts,knee,knee,22.83341234944545,5,1252
+English (American),knife,nouns,household,knife,knife,25.180125523737622,4.9,749
+English (American),knock,predicates,action_words,knock,knock,25.65520970263338,4.24,1500
+English (American),ladder,nouns,outside,ladder,ladder,27.453139889383696,5,836
+English (American),lamb,nouns,animals,lamb,lamb,26.77611745254101,4.97,762
+English (American),lamp,nouns,household,lamp,lamp,27.707727325952707,4.97,286
+English (American),last,predicates,descriptive_words,last,last,31.94810812999018,3.04,6041
+English (American),lawn mower,nouns,outside,lawn mower,lawn mower,26.25206641047887,4.93,37
+English (American),leg,nouns,body_parts,leg,leg,22.786751225180204,4.83,1696
+English (American),lick,predicates,action_words,lick,lick,27.885918786410006,4.52,443
+English (American),light (object),nouns,household,light,light,20.167269067810214,4.21,2752
+English (American),like (action),predicates,action_words,like,like,25.712763627585442,1.89,80659
+English (American),lion,nouns,animals,lion,lion,23.292560818293822,4.96,1972
+English (American),listen,predicates,action_words,listen,listen,28.120047324042673,3.47,3194
+English (American),little (description),predicates,descriptive_words,little (description),little,25.166304259548355,3.67,39012
+English (American),living room,nouns,furniture_rooms,living room,living room,27.67343106925516,4.7,431
+English (American),lollipop,nouns,food_drink,lollipop,lollipop,27.20359032793206,4.96,276
+English (American),long,predicates,descriptive_words,long,long,30.43920077538411,3.18,5656
+English (American),look,predicates,action_words,look,look,24.07200126089267,2.96,68469
+English (American),loud,predicates,descriptive_words,loud,loud,27.096587104346657,3.73,1100
+English (American),love,predicates,action_words,love,love,22.97930051104563,2.07,5139
+English (American),mad,predicates,descriptive_words,mad,mad,28.322211878333118,2.76,839
+English (American),make,predicates,action_words,make,make,27.26683722139889,2.67,22678
+English (American),me,function_words,pronouns,me,me,21.782136908963487,4.33,58317
+English (American),meat,nouns,food_drink,meat,meat,25.21618096142793,4.9,986
+English (American),medicine,nouns,household,medicine,medicine,24.410637544584084,4.79,915
+English (American),melon,nouns,food_drink,melon,melon,26.929946230882774,4.78,141
+English (American),milk,nouns,food_drink,milk,milk,18.304538681163276,4.92,5537
+English (American),mine,function_words,pronouns,mine,mine,20.0092783421445,3.56,2670
+English (American),mittens,nouns,clothing,mittens,mittens,27.13676422394422,4.89,267
+English (American),money,nouns,household,money,money,22.84702188801892,4.54,3251
+English (American),monkey,nouns,animals,monkey,monkey,21.75146876358306,4.9,2316
+English (American),moon,nouns,outside,moon,moon,21.064582625649372,4.9,1461
+English (American),moose,nouns,animals,moose,moose,30.726348818983883,4.97,324
+English (American),mop,nouns,household,mop,mop,28.697523528698856,4.97,158
+English (American),more,function_words,quantifiers,more,more,19.934125196097916,2.37,23403
+English (American),motorcycle,nouns,vehicles,motorcycle,motorcycle,25.424516980060698,4.97,366
+English (American),mouse,nouns,animals,mouse,mouse,23.186364426729803,4.83,1784
+English (American),mouth,nouns,body_parts,mouth,mouth,20.385274871125226,4.74,6017
+English (American),much,function_words,quantifiers,much,much,31.135471437484984,1.69,7404
+English (American),muffin,nouns,food_drink,muffin,muffin,26.053662526327358,4.78,219
+English (American),my,function_words,pronouns,my,my,24.67561156823274,2.42,30474
+English (American),myself,function_words,pronouns,myself,myself,30.826981734088697,2.97,674
+English (American),nail (object),nouns,household,nail,nail,27.745919885712205,4.93,268
+English (American),napkin,nouns,household,napkin,napkin,24.71066092570806,4.93,393
+English (American),naughty,predicates,descriptive_words,naughty,naughty,30.45927863451864,2.04,2904
+English (American),necklace,nouns,clothing,necklace,necklace,25.67583784602768,4.96,341
+English (American),need,function_words,helping_predicates,need/need to,need,28.517326473959855,1.69,11101
+English (American),new,predicates,descriptive_words,new,new,28.242927764036946,2.81,5522
+English (American),nice,predicates,descriptive_words,nice,nice,24.731878757128417,2.18,20152
+English (American),noisy,predicates,descriptive_words,noisy,noisy,28.238292864810433,3.56,903
+English (American),none,function_words,quantifiers,none,none,30.075465085938674,2.59,494
+English (American),nose,nouns,body_parts,nose,nose,17.50000892567104,4.89,5607
+English (American),not,function_words,quantifiers,not,not,28.331503696333467,2.08,62788
+English (American),of,function_words,locations,of,of,32.135421130600605,1.67,72422
+English (American),off,function_words,locations,off,off,21.76331515371575,2.79,21580
+English (American),old,predicates,descriptive_words,old,old,29.745205894423886,2.72,3975
+English (American),on,function_words,locations,on,on,22.07453703332649,3.25,130164
+English (American),open (action),predicates,action_words,open,open,21.70959024951605,3.21,8246
+English (American),orange (description),predicates,descriptive_words,orange (description),orange,24.48307542955755,4.66,10036
+English (American),orange (food),nouns,food_drink,orange (food),orange,22.862362842722305,4.66,10036
+English (American),other,function_words,quantifiers,other,other,29.008003039766972,2.04,15644
+English (American),our,function_words,pronouns,our,our,31.879580552349164,1.97,6116
+English (American),out,function_words,locations,out,out,21.787538623492427,2.73,34288
+English (American),outside,nouns,outside,outside,outside,20.10026304783487,4.25,5164
+English (American),oven,nouns,furniture_rooms,oven,oven,26.959440376130473,4.97,718
+English (American),over,function_words,locations,over,over,27.81126335036735,2.46,23641
+English (American),owie,nouns,body_parts,owie/boo boo,owie,19.225364028172503,3.61,101
+English (American),owl,nouns,animals,owl,owl,24.378811443862723,4.93,737
+English (American),paint (action),predicates,action_words,paint,paint,26.7264001349599,4.79,1346
+English (American),pajamas,nouns,clothing,pajamas,pajamas,23.01441672978766,4.73,776
+English (American),pancake,nouns,food_drink,pancake,pancake,24.195947688413984,4.86,201
+English (American),pants,nouns,clothing,pants,pants,21.997653199154513,4.86,2028
+English (American),paper,nouns,household,paper,paper,22.40794784536237,4.93,4643
+English (American),park,nouns,outside,park,park,23.44395480659095,4.74,1855
+English (American),party,nouns,outside,party,party,26.48232416632208,3.89,2705
+English (American),pasta,nouns,food_drink,noodles,noodles,22.2125626020018,4.86,209
+English (American),pasta,nouns,food_drink,spaghetti,spaghetti,22.2125626020018,4.86,1466
+English (American),peanut butter,nouns,food_drink,peanut butter,peanut butter,24.48646845168075,4.93,323
+English (American),peas,nouns,food_drink,peas,peas,24.557921410443495,4.9,2307
+English (American),pen,nouns,toys,pen,pen,23.51987496977609,4.92,1411
+English (American),pencil,nouns,toys,pencil,pencil,25.06258390684458,4.88,1040
+English (American),penguin,nouns,animals,penguin,penguin,27.293224141508716,5,658
+English (American),penis,nouns,body_parts,penis*,penis,26.231902171762034,5,35
+English (American),penny,nouns,household,penny,penny,26.32129034179081,4.83,575
+English (American),pick,predicates,action_words,pick,pick,28.350959500123274,3.82,4884
+English (American),pickle,nouns,food_drink,pickle,pickle,25.496142784956177,4.64,191
+English (American),picture,nouns,household,picture,picture,24.228451852721275,4.52,6309
+English (American),pig,nouns,animals,pig,pig,21.04970478014681,5,2423
+English (American),pillow,nouns,household,pillow,pillow,22.179110907856753,5,683
+English (American),pizza,nouns,food_drink,pizza,pizza,21.33010054090465,5,2650
+English (American),plant,nouns,household,plant,plant,26.161845259337724,4.76,519
+English (American),plate,nouns,household,plate,plate,24.38848139227323,4.77,2600
+English (American),play,predicates,action_words,play,play,22.50225294745721,3.24,23148
+English (American),play dough,nouns,toys,play dough,play dough,27.200019866322975,4.68,124
+English (American),play pen,nouns,furniture_rooms,play pen,play pen,30.93414000000259,4.76,13
+English (American),pony,nouns,animals,pony,pony,27.149124759679015,4.9,253
+English (American),pool,nouns,outside,pool,pool,23.288489299463958,4.77,860
+English (American),poor,predicates,descriptive_words,poor,poor,32.66767129734731,2.7,2640
+English (American),popcorn,nouns,food_drink,popcorn,popcorn,23.68702745961217,5,195
+English (American),popsicle,nouns,food_drink,popsicle,popsicle,25.14044583723922,4.93,120
+English (American),porch,nouns,furniture_rooms,porch,porch,29.70353523171374,4.92,84
+English (American),potato,nouns,food_drink,potato,potato,25.045299416217585,4.85,594
+English (American),potty,nouns,furniture_rooms,potty,potty,21.163868967261262,4.12,991
+English (American),pour,predicates,action_words,pour,pour,28.27835611871483,4.14,1410
+English (American),present,nouns,toys,present,present,24.99147354255208,3.39,1400
+English (American),pretend,predicates,action_words,pretend,pretend,31.275328228201392,2.11,3413
+English (American),pretty,predicates,descriptive_words,pretty,pretty,23.70523132395096,2.4,6516
+English (American),pretzel,nouns,food_drink,pretzel,pretzel,27.086772724245172,4.74,85
+English (American),pudding,nouns,food_drink,pudding,pudding,28.336874661648956,4.9,306
+English (American),pull,predicates,action_words,pull,pull,26.41351492122096,3.97,4797
+English (American),pumpkin,nouns,food_drink,pumpkin,pumpkin,25.596056826431344,4.9,815
+English (American),puppy,nouns,animals,puppy,puppy,20.642644342886626,4.78,1308
+English (American),purse,nouns,household,purse,purse,24.680534115242512,4.9,487
+English (American),push,predicates,action_words,push,push,24.884039995017684,4.21,5386
+English (American),put,predicates,action_words,put,put,27.180432184212417,2.5,68322
+English (American),puzzle,nouns,toys,puzzle,puzzle,24.603177970245078,4.75,2062
+English (American),quiet,predicates,descriptive_words,quiet,quiet,27.05139131191479,2.76,1380
+English (American),radio,nouns,household,radio,radio,26.613053034699238,4.74,355
+English (American),rain,nouns,outside,rain,rain,22.05272569057193,4.97,1240
+English (American),raisin,nouns,food_drink,raisin,raisin,23.922862069518597,4.97,169
+English (American),read,predicates,action_words,read,read,22.864582930368915,3.56,9185
+English (American),red,predicates,descriptive_words,red,red,24.476663524110176,4.24,9917
+English (American),refrigerator,nouns,furniture_rooms,refrigerator,refrigerator,25.673848500166034,5,562
+English (American),ride,predicates,action_words,ride,ride,24.3290998464415,3.75,2928
+English (American),rip,predicates,action_words,rip,rip,30.898483534092605,3.79,375
+English (American),rock (object),nouns,outside,rock,rock,22.092980833031184,4.91,875
+English (American),rocking chair,nouns,furniture_rooms,rocking chair,rocking chair,26.286720661876167,4.93,184
+English (American),roof,nouns,outside,roof,roof,29.380455204401983,4.79,941
+English (American),room,nouns,furniture_rooms,room,room,24.7800417765674,4.79,5211
+English (American),rooster,nouns,animals,rooster,rooster,27.785104097477404,4.75,422
+English (American),run,predicates,action_words,run,run,23.547368180082476,4.31,2505
+English (American),sad,predicates,descriptive_words,sad,sad,26.975730544989975,3.07,1405
+English (American),salt,nouns,food_drink,salt,salt,28.441896714165853,4.89,431
+English (American),same,function_words,quantifiers,same,same,30.94396519191967,2.64,3923
+English (American),sandbox,nouns,outside,sandbox,sandbox,26.956125375322088,4.86,172
+English (American),sandwich,nouns,food_drink,sandwich,sandwich,24.33836806143716,4.9,1683
+English (American),sauce,nouns,food_drink,sauce,sauce,27.988140408941376,4.75,487
+English (American),say,predicates,action_words,say,say,27.350714856102098,2.58,29942
+English (American),scared,predicates,descriptive_words,scared,scared,27.284769726224756,2.5,1001
+English (American),scarf,nouns,clothing,scarf,scarf,31.0680540145124,4.97,254
+English (American),school,nouns,outside,school,school,23.424986892471757,4.79,6710
+English (American),scissors,nouns,household,scissors,scissors,25.34069479638193,4.85,742
+English (American),see,predicates,action_words,see,see,22.628651743930725,3.21,71442
+English (American),shake,predicates,action_words,shake,shake,27.417577200447113,4.07,2018
+English (American),share,predicates,action_words,share,share,26.777735575736017,2.96,1061
+English (American),she,function_words,pronouns,she,she,29.293434421039155,3.36,53246
+English (American),sheep,nouns,animals,sheep,sheep,23.925866583400786,4.9,2362
+English (American),shirt,nouns,clothing,shirt,shirt,21.792127463554,4.94,2380
+English (American),shoe,nouns,clothing,shoe,shoe,16.401616618833103,4.97,2169
+English (American),shorts,nouns,clothing,shorts,shorts,24.909759184344438,4.82,425
+English (American),shoulder,nouns,body_parts,shoulder,shoulder,27.357714981859722,4.93,225
+English (American),shovel,nouns,outside,shovel,shovel,25.93264008363907,4.97,291
+English (American),show,predicates,action_words,show,show,27.85277401420022,3.97,8568
+English (American),shower,nouns,furniture_rooms,shower,shower,23.85617473782963,4.89,513
+English (American),sick,predicates,descriptive_words,sick,sick,27.025423107263375,2.97,1207
+English (American),sidewalk,nouns,outside,sidewalk,sidewalk,27.982232325403388,4.96,104
+English (American),sing,predicates,action_words,sing,sing,24.699537103250435,4.34,3851
+English (American),sink,nouns,furniture_rooms,sink,sink,25.65056395838028,4.74,560
+English (American),sit,predicates,action_words,sit,sit,21.750618675138146,4.8,14108
+English (American),skate,predicates,action_words,skate,skate,30.980023419231532,4.56,55
+English (American),sky,nouns,outside,sky,sky,24.179550783288896,4.45,1303
+English (American),sled,nouns,vehicles,sled,sled,29.4219079215242,5,90
+English (American),sleep,predicates,action_words,sleep,sleep,22.7674333859663,4.44,5010
+English (American),sleepy,predicates,descriptive_words,sleepy,sleepy,25.765911658239688,2.77,808
+English (American),slide (action),predicates,action_words,slide (action),slide,24.394104047595913,4.48,3556
+English (American),slide (object),nouns,outside,slide (object),slide,23.27441979107034,4.48,3556
+English (American),slipper,nouns,clothing,slipper,slipper,25.90935922531163,4.86,266
+English (American),slow,predicates,descriptive_words,slow,slow,29.462982166623352,3.28,515
+English (American),smile,predicates,action_words,smile,smile,27.022198912378336,4.5,498
+English (American),sneaker,nouns,clothing,sneaker,sneaker,28.458789287265894,4.69,22
+English (American),snow,nouns,outside,snow,snow,25.263272056571832,4.85,1575
+English (American),snowman,nouns,outside,snowman,snowman,27.67210714348651,4.64,577
+English (American),snowsuit,nouns,clothing,snowsuit,snowsuit,32.10541910633961,5,14
+English (American),so,function_words,connecting_words,so,so,31.12075549333711,1.42,44980
+English (American),soap,nouns,household,soap,soap,22.217921774180518,4.93,709
+English (American),sock,nouns,clothing,sock,sock,19.632046621854386,4.91,831
+English (American),soda,nouns,food_drink,soda/pop,soda,24.87205183714649,4.97,226
+English (American),sofa,nouns,furniture_rooms,sofa,sofa,29.394839148936164,4.9,450
+English (American),soft,predicates,descriptive_words,soft,soft,26.4496476384763,3.88,1358
+English (American),some,function_words,quantifiers,some,some,26.15437450894456,2.48,45706
+English (American),soup,nouns,food_drink,soup,soup,24.537539621938286,4.72,1288
+English (American),spill,predicates,action_words,spill,spill,26.85160156093012,4.07,741
+English (American),splash,predicates,action_words,splash,splash,25.60191719014938,4.19,709
+English (American),spoon,nouns,household,spoon,spoon,20.22002234723444,4.96,3524
+English (American),sprinkler,nouns,outside,sprinkler,sprinkler,28.75113806495684,4.89,52
+English (American),squirrel,nouns,animals,squirrel,squirrel,25.05065234245397,4.89,507
+English (American),stairs,nouns,furniture_rooms,stairs,stairs,24.47753335085588,5,1063
+English (American),stand,predicates,action_words,stand,stand,26.47937683978296,4.16,3558
+English (American),star,nouns,outside,star,star,22.957358462903812,4.69,1068
+English (American),stay,predicates,action_words,stay,stay,26.586593702088443,2.15,4403
+English (American),stick,nouns,outside,stick,stick,24.363668955777232,4.59,2642
+English (American),sticky,predicates,descriptive_words,sticky,sticky,26.569871206088944,3.59,1177
+English (American),stone,nouns,outside,stone,stone,29.654573348257873,4.72,306
+English (American),stop,predicates,action_words,stop,stop,22.813711423562257,3.68,5527
+English (American),store,nouns,outside,store,store,23.347629882628436,4.5,1651
+English (American),story,nouns,toys,story,story,24.92454125516168,3.3,5318
+English (American),stove,nouns,furniture_rooms,stove,stove,26.381537023983125,4.96,520
+English (American),strawberry,nouns,food_drink,strawberry,strawberry,24.304122215327734,5,840
+English (American),street,nouns,outside,street,street,25.6074840807896,4.75,987
+English (American),stroller,nouns,vehicles,stroller,stroller,24.603444785777125,4.96,227
+English (American),stuck,predicates,descriptive_words,stuck,stuck,25.790527319514812,3.55,3519
+English (American),sun,nouns,outside,sun,sun,23.386638497101277,4.83,1983
+English (American),sweater,nouns,clothing,sweater,sweater,24.620590384363602,4.78,310
+English (American),sweep,predicates,action_words,sweep,sweep,26.53419291818447,3.72,266
+English (American),swim,predicates,action_words,swim,swim,24.83257594574256,4.43,986
+English (American),swing (action),predicates,action_words,swing (action),swing,23.099517041407093,4.54,2158
+English (American),swing (object),nouns,outside,swing (object),swing,21.97332053501421,4.54,2158
+English (American),table,nouns,furniture_rooms,table,table,23.395064163035677,4.9,5798
+English (American),take,predicates,action_words,take,take,27.354093799677152,3.06,20398
+English (American),talk,predicates,action_words,talk,talk,26.172898281486297,4.07,4771
+English (American),tape,nouns,household,tape,tape,25.98869069431121,4.9,2967
+English (American),taste,predicates,action_words,taste,taste,28.306250651871636,4.07,1493
+English (American),tear,predicates,action_words,tear,tear,30.110713846716816,4.56,352
+English (American),teddybear,nouns,animals,teddybear,teddybear,22.457673785720814,4.87,513
+English (American),telephone,nouns,household,telephone,telephone,20.80553350305347,4.96,1280
+English (American),that,function_words,pronouns,that,that,24.03974924284265,1.54,219719
+English (American),the,function_words,quantifiers,the,the,27.71532064680694,1.43,431031
+English (American),their,function_words,pronouns,their,their,33.050453300967234,3.34,5083
+English (American),them,function_words,pronouns,them,them,31.425327261028436,3.04,41587
+English (American),then,function_words,connecting_words,then,then,32.94497320291506,1.44,43062
+English (American),there,function_words,locations,there,there,25.554374013411266,2.2,106697
+English (American),these,function_words,pronouns,these,these,28.91030410540727,2.03,20843
+English (American),they,function_words,pronouns,they,they,31.558011791688703,2.93,53290
+English (American),think,predicates,action_words,think,think,31.060977381002104,2.41,57446
+English (American),thirsty,predicates,descriptive_words,thirsty,thirsty,25.9814458268787,3.86,776
+English (American),this,function_words,pronouns,this,this,25.53668411833393,2.14,112409
+English (American),those,function_words,pronouns,those,those,30.71305685632802,2.32,19370
+English (American),throw,predicates,action_words,throw,throw,24.82027667799749,4.04,5585
+English (American),tickle,predicates,action_words,tickle,tickle,23.030865141786716,3.85,2094
+English (American),tiger,nouns,animals,tiger,tiger,23.97601642667219,5,2349
+English (American),tights,nouns,clothing,tights,tights,30.49526782372822,4.62,89
+English (American),tiny,predicates,descriptive_words,tiny,tiny,30.75118196119715,3.11,1454
+English (American),tired,predicates,descriptive_words,tired,tired,26.126063847560406,3,3628
+English (American),tissue,nouns,household,tissue/kleenex,tissue,24.881517554334437,4.93,915
+English (American),to,function_words,locations,to,to,27.829074756482076,1.55,183409
+English (American),toast,nouns,food_drink,toast,toast,22.957745051917446,4.93,2117
+English (American),toe,nouns,body_parts,toe,toe,21.063402869488534,4.93,596
+English (American),tongue,nouns,body_parts,tongue,tongue,23.578714641827492,4.93,776
+English (American),too,function_words,quantifiers,too,too,25.97451456969294,1.7,21317
+English (American),tooth,nouns,body_parts,tooth,tooth,21.390186244463926,4.89,351
+English (American),toothbrush,nouns,household,toothbrush,toothbrush,21.327972861784076,5,330
+English (American),touch,predicates,action_words,touch,touch,26.140740016873888,3.86,3096
+English (American),towel,nouns,household,towel,towel,23.309359030136616,4.86,942
+English (American),toy (object),nouns,toys,toy (object),toy,21.250379422750402,4.93,2764
+English (American),tractor,nouns,vehicles,tractor,tractor,26.293460903708173,5,1903
+English (American),train,nouns,vehicles,train,train,21.050773507323704,4.79,8225
+English (American),trash,nouns,household,trash,trash,24.623003619992428,4.7,297
+English (American),tray,nouns,household,tray,tray,31.297608014031766,4.74,570
+English (American),tree,nouns,outside,tree,tree,20.395692984405432,5,4310
+English (American),tricycle,nouns,vehicles,tricycle,tricycle,28.84180554601145,4.68,163
+English (American),truck,nouns,vehicles,truck,truck,19.04437063778738,4.84,4906
+English (American),try,function_words,helping_predicates,try/try to,try,28.751119300000134,2.22,8718
+English (American),tummy,nouns,body_parts,tummy,tummy,21.281768482103764,4.68,1772
+English (American),tuna,nouns,food_drink,tuna,tuna,28.649288768887633,4.89,208
+English (American),turkey,nouns,animals,turkey,turkey,26.30455622910081,4.89,611
+English (American),turtle,nouns,animals,turtle,turtle,23.014453310177558,5,792
+English (American),tv,nouns,furniture_rooms,TV,tv,21.36643906838051,5,1285
+English (American),under,function_words,locations,under,under,27.467319313886602,3.45,4364
+English (American),underpants,nouns,clothing,underpants,underpants,27.702339180277328,4.89,111
+English (American),up,function_words,locations,up,up,19.536229246282858,3.83,54966
+English (American),us,function_words,pronouns,us,us,32.68418082412553,3.59,7432
+English (American),vacuum,nouns,household,vacuum,vacuum,24.31715488103081,4.22,241
+English (American),vagina,nouns,body_parts,vagina*,vagina,30.74482822160873,4.82,8
+English (American),vanilla,nouns,food_drink,vanilla,vanilla,31.134282822644582,4.68,196
+English (American),vitamins,nouns,food_drink,vitamins,vitamins,26.849949095931386,4.5,85
+English (American),wait,predicates,action_words,wait,wait,26.620371092775404,2.68,7959
+English (American),wake,predicates,action_words,wake,wake,27.154377902728353,3.11,1167
+English (American),walk,predicates,action_words,walk,walk,22.817811861035416,4.07,3506
+English (American),walker,nouns,household,walker,walker,31.785543166543064,4.42,60
+English (American),wanna,function_words,helping_predicates,wanna/want to,wanna,25.18163215638973,1.93,45282
+English (American),was,function_words,helping_predicates,was,was,31.797860743565355,1.69,47639
+English (American),wash,predicates,action_words,wash,wash,23.987564663405482,4.35,3451
+English (American),washing machine,nouns,furniture_rooms,washing machine,washing machine,27.543044986998385,4.89,239
+English (American),watch (action),predicates,action_words,watch (action),watch,25.924613964341088,4.61,15632
+English (American),watch (object),nouns,household,watch (object),watch,24.00259582021144,4.61,15632
+English (American),water (beverage),nouns,food_drink,water (beverage),water,19.123463892055845,5,17388
+English (American),water (not beverage),nouns,outside,water (not beverage),water,19.45099861331479,5,17388
+English (American),we,function_words,pronouns,we,we,30.182434631151455,3.08,111064
+English (American),were,function_words,helping_predicates,were,were,33.709463033181024,1.48,30396
+English (American),wet (description),predicates,descriptive_words,wet,wet,22.298452425741512,4.46,2542
+English (American),what,function_words,question_words,what,what,23.658782166516907,2,205010
+English (American),when (question),function_words,question_words,when,when,31.814907045715227,1.6,27792
+English (American),where (question),function_words,question_words,where,where,25.7164381182961,1.66,38793
+English (American),which (question),function_words,question_words,which,which,33.63776900674318,1.54,10214
+English (American),white,predicates,descriptive_words,white,white,27.648764293432254,3.89,3496
+English (American),who,function_words,question_words,who,who,27.953549755744795,1.74,20283
+English (American),why,function_words,question_words,why,why,27.262555741780712,1.86,22267
+English (American),will,function_words,helping_predicates,will,will,30.909905381379183,2.64,14927
+English (American),wind,nouns,outside,wind,wind,26.19931053900361,3.93,1298
+English (American),window,nouns,furniture_rooms,window,window,24.48492597146611,4.86,2662
+English (American),windy,predicates,descriptive_words,windy,windy,27.431143183092633,3.86,342
+English (American),wipe,predicates,action_words,wipe,wipe,25.95723852087949,4,1809
+English (American),wish,predicates,action_words,wish,wish,32.96609018388594,1.77,669
+English (American),with,function_words,locations,with,with,28.56625914577001,2,64176
+English (American),wolf,nouns,animals,wolf,wolf,28.251389709841927,4.79,431
+English (American),work (action),predicates,action_words,work (action),work,24.762232083800356,3.48,12134
+English (American),work (place),nouns,outside,work (place),work,24.024006606906344,3.48,12134
+English (American),would,function_words,helping_predicates,would,would,34.17580948877974,1.12,22070
+English (American),write,predicates,action_words,write,write,26.86079876248854,4.22,2971
+English (American),yard,nouns,outside,backyard,backyard,26.10807276380005,4.82,105
+English (American),yellow,predicates,descriptive_words,yellow,yellow,24.5595931762692,4.3,6782
+English (American),yogurt,nouns,food_drink,yogurt,yogurt,23.91372922424347,4.9,589
+English (American),you,function_words,pronouns,you,you,24.120602892947364,4.11,589501
+English (American),your,function_words,pronouns,your,your,29.787082244817054,2.37,105998
+English (American),yourself,function_words,pronouns,yourself,yourself,34.28546272279592,4.39,3279
+English (American),yucky,predicates,descriptive_words,yucky,yucky,22.051017838612175,1.86,724
+English (American),zebra,nouns,animals,zebra,zebra,25.31795862018206,4.86,902
+English (American),zipper,nouns,clothing,zipper,zipper,24.84585073879806,4.83,421
+English (American),zoo,nouns,outside,zoo,zoo,25.777390810890576,4.81,1804
+English (American),butt,nouns,body_parts,buttocks/bottom*,bottom,21.98056796070707,4.75,2253
+English (American),did,function_words,helping_predicates,did/did ya,did ya,28.236905169713484,2.45,195
+English (American),in,function_words,locations,inside/in,in,24.07962150691501,3,276036
+English (American),need,function_words,helping_predicates,need/need to,need to,28.517326473959855,1.69,829
+English (American),soda,nouns,food_drink,soda/pop,pop,24.87205183714649,4.97,2512
+English (American),tissue,nouns,household,tissue/kleenex,kleenex,24.881517554334437,4.93,91
+English (American),try,function_words,helping_predicates,try/try to,try to,28.751119300000134,2.22,1273
+English (American),wanna,function_words,helping_predicates,wanna/want to,want to,25.18163215638973,1.93,1415
