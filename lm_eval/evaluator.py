@@ -263,6 +263,7 @@ def evaluate(
         with open(predictions_path, 'w') as preds_file:
             preds_file.write("index\tprediction\n")
             for index, prediction in enumerate(preds):
+                prediction = prediction.replace("\n", "\\n")
                 preds_file.write(f"{index}\t{prediction}\n")
     
     # Aggregate results

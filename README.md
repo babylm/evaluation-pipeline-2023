@@ -68,7 +68,7 @@ We provide a shell script that will collect your results into a single file:
 
 This will output a file called `all_predictions.json` in the root folder of this repository. We will ask you to upload this file to a submission portal.
 
-We will also ask you to share a link where we can download your model and tokenizer. We will evaluate on held-out tasks as part of the final evaluation.
+We will also ask you to share a link where we can download your model and tokenizer.
 
 ### Format of Predictions
 If you wish to submit your results and you are not using the `collect_results.py` script, please ensure that your predictions file conforms to the submission format (example provided here as `sample_predictions.json`). This is a file consisting of line-separated JSON objects, where each line corresponds to a single subtask.
@@ -82,17 +82,19 @@ For each line, the JSON object includes a `task` field ("blimp", "glue", "supple
 ### Age-of-acquisition prediction Evaluation
 This evaluation is based on Portelance, Duan, Lupyan and Frank 2023 (see citation below).
 
-If you want to run it, add the flag "--run_aoa" to the "zero-shot" evaluations script above :
+If you want to run it, run the zero-shot evaluation script with the "--run_aoa" flag:
 
 ```bash
 python babylm_eval.py 'path/to/model_and_tokenizer' 'model_type' --run_aoa
 ```
 
- Note, the evaluation requires access to forward pass labels from your tokenizer. It currently expects the tokenizer to either produce them under the key "labels" if the model type is a "decoder" where labels represent the shifted "input_ids", or if no labels are provided, it will set the "labels" to be equal to the "input_ids" (this is done automatically for "encoder" and "encoder-decoder" type models. In the event that your labels are not equal to the input_ids, please make sure your tokenizer contains them under the key "labels".
+Note, the evaluation requires access to forward pass labels from your tokenizer. It currently expects the tokenizer to either produce them under the key "labels" if the model type is a "decoder" where labels represent the shifted "input_ids", or if no labels are provided, it will set the "labels" to be equal to the "input_ids" (this is done automatically for "encoder" and "encoder-decoder" type models. In the event that your labels are not equal to the input_ids, please make sure your tokenizer contains them under the key "labels".
 
-Once it runs, it will produce two json files in a folder called "aoa_prediction" in the model directory provided. One of the files contains the estimated average surprisal of words for the model in child directed utterances taken from CHILDES. The other contains the results of the evaluation. Models are evaluated using leave-one-out cross validation. The results are Mean Absolute Deviation (MAD) scores in months between the actual average age-of-acquisition (aoa) of these words by American English speaking children and the predicted aoa based on the models average surprisal scores (the closer the MAD scores are to zero, the better). MAD scores are provided over all the words, over nouns, over predicates, and over function words. Previous work has found that models tend to do better at predicting the aoa of predicates and function words over nouns.
+Once it runs, it will produce two json files in a folder called "aoa_prediction" in the model directory provided. One of the files contains the estimated average surprisal of words for the model in child directed utterances taken from CHILDES. The other contains the results of the evaluation. Models are evaluated using leave-one-out cross validation. The results are Mean Absolute Deviation (MAD) scores in months between the actual average age-of-acquisition (AoA) of these words by American English speaking children and the predicted AoA based on the models average surprisal scores (the closer the MAD scores are to zero, the better). MAD scores are provided over all the words, over nouns, over predicates, and over function words. Previous work has found that models tend to do better at predicting the AoA of predicates and function words over nouns.
 
-The better the fit better a model's predictions and the actual aoa of words in kids (the smaller the MAD scores), the more the order in which models learn words resembles the order in which children tend to learn words.
+The better the fit, the better a model's predictions and the actual AoA of words in kids (the smaller the MAD scores), the more the order in which models learn words resembles the order in which children tend to learn words.
+
+Note that, while we do not require you to run this evaluation or submit your score for our evaluation, we highly encourage you to compute this metric and discuss it in your paper!
 
 ## Baselines
 We provide a series of baseline models that we train on our strict or strict-small dataset. These are [hosted on HuggingFace](https://huggingface.co/babylm).
@@ -110,6 +112,13 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 | RoBERTa-base | 81.5 | 67.1 | 67.3 | 67.9 | 90.8 | 76.4 | 63.5 | 87.4 | 39.9 | 55.9 | 70.5 | 65.4 |
 | T5-base | 68.9 | 63.8 | 60.4 | 60.9 | 72.2 | 34.4 | 48.2 | 77.6 | 45.6 | 47.8 | 61.2 | 65.0 |
 
+*BLiMP Supplement*
+| Model | Hypernym | QA Congruence (easy) | QA Congruence (tricky) | Subj.-Aux. Inversion | Turn Taking |
+| --- | --- | --- | --- | --- | --- |
+| OPT-125m | 50.0 | 54.7 | 31.5 | 80.3 | 57.1 |
+| RoBERTa-base | 49.4 | 31.3 | 32.1 | 71.7 | 53.2 |
+| T5-base | 48.0 | 40.6 | 21.2 | 64.9 | 45.0 |
+
 *(Super)GLUE*
 | Model | CoLA | SST-2 | MRPC (F1) | QQP (F1) | MNLI | MNLI-mm | QNLI | RTE | BoolQ | MultiRC | WSC |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -117,6 +126,13 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 | OPT-125m | 64.6 | 81.9 | 72.5 | 60.4 | 57.6 | 60.0 | 61.5 | 60.0 | 63.3 | 55.2 | 60.2 |
 | RoBERTa-base | 70.8 | 87.0 | 79.2 | 73.7 | 73.2 | 74.0 | 77.0 | 61.6 | 66.3 | 61.4 | 61.4 |
 | T5-base | 61.2 | 78.1 | 80.5 | 66.2 | 48.0 | 50.3 | 62.0 | 49.4 | 66.0 | 47.1 | 61.4 |
+
+*MSGS*
+| Model | CR (Control) | LC (Control) | MV (Control) | RP (Control) | SC (Control) | CR_LC | CR_RTP | MV_LC | MV_RTP | SC_LC | SC_RP |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| OPT-125m | 86.4 | 86.1 | 99.8 | 100.0 | 94.3 | 66.5 | 67.0 | 66.5 | 67.6 | 80.2 | 67.5 |
+| RoBERTa-base | 84.1 | 100.0 | 99.4 | 93.5 | 96.4 | 67.7 | 68.6 | 66.7 | 68.6 | 84.2 | 65.7 | 
+| T5-base | 78.4 | 100.0 | 72.7 | 95.5 | 94.4 | 66.7 | 69.7 | 66.6 | 66.9 | 73.6 | 67.8 |
 
 *Age-of-acquisition Prediction*
 (Mean absolute deviation in months across LOO cross-validation folds)
@@ -137,6 +153,13 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 | RoBERTa-base | 89.5 | 71.3 | 71 | 67.1 | 93.1 | 83.8 | 68.0 | 89.6 | 54.5 | 66.3 | 70.3 | 76.2 |
 | T5-base | 66.7 | 61.2 | 59.4 | 59.8 | 53.8 | 49.1 | 70.0 | 75.5 | 43.6 | 45.6 | 34.2 | 53.2 |
 
+*BLiMP Supplement*
+| Model | Hypernym | QA Congruence (easy) | QA Congruence (tricky) | Subj.-Aux. Inversion | Turn Taking |
+| --- | --- | --- | --- | --- | --- |
+| OPT-125m | 46.3 | 76.5 | 47.9 | 85.3 | 82.9 |
+| RoBERTa-base | 50.8 | 34.4 | 34.5 | 45.6 | 46.8 |
+| T5-base | 51.1 | 45.3 | 25.5 | 69.2 | 48.9 |
+
 *(Super)GLUE*
 | Model | CoLA | SST-2 | MRPC (F1) | QQP (F1) | MNLI | MNLI-mm | QNLI | RTE | BoolQ | MultiRC | WSC |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -145,13 +168,12 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 | RoBERTa-base | 75.9 | 88.6 | 80.5 | 78.5 | 68.7 | 78.0 | 82.3 | 51.5 | 59.9 | 61.3 | 61.4 |
 | T5-base | 76.3 | 88.0 | 85.9 | 79.7 | 71.5 | 74.0 | 83.1 | 60.6 | 69.0 | 62.4 | 60.2 |
 
-*Age-of-acquisition Prediction*
-(Mean absolute deviation in months across LOO cross-validation folds)
-| Model | Overall (591 words) | Nouns (322) | Predicates (167) | Function words (102) |
-| --- | --- | --- | --- | --- |
-| OPT-125m | 2.04 | 1.97 | 1.83 | 2.61 |
-| RoBERTa-base | 2.06 | 1.99 | 1.82 | 2.66 |
-| T5-base | 2.06 | 2.0 | 1.83 | 2.65 |
+*MSGS*
+| Model | CR (Control) | LC (Control) | MV (Control) | RP (Control) | SC (Control) | CR_LC | CR_RTP | MV_LC | MV_RTP | SC_LC | SC_RP |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| OPT-125m | 97.2 | 82.6 | 100.0 | 99.8 | 88.1 | 75.3 | 67.1 | 66.3 | 66.8 | 84.8 | 62.0 | 
+| RoBERTa-base | 93.0 | 100.0 | 100.0 | 100.0 | 89.0 | 68.3 | 66.8 | 66.6 | 80.2 | 67.4 | 67.4 | 
+| T5-base | 95.1 | 100.0 | 100.0 | 99.8 | 88.7 | 76.7 | 69.4 | 67.0 | 67.7 | 72.7 | 68.0 |
 
 -----------------------
 
