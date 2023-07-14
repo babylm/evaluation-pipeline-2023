@@ -175,6 +175,14 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 | RoBERTa-base | 93.0 | 100.0 | 100.0 | 100.0 | 89.0 | 68.3 | 66.8 | 66.6 | 80.2 | 67.4 | 67.4 | 
 | T5-base | 95.1 | 100.0 | 100.0 | 99.8 | 88.7 | 76.7 | 69.4 | 67.0 | 67.7 | 72.7 | 68.0 |
 
+*Age-of-acquisition Prediction*
+(Mean absolute deviation in months across LOO cross-validation folds)
+| Model | Overall (591 words) | Nouns (322) | Predicates (167) | Function words (102) |
+| --- | --- | --- | --- | --- |
+| OPT-125m | 2.04 | 1.97 | 1.83 | 2.61 |
+| RoBERTa-base | 2.06 | 1.99 | 1.82 | 2.66 |
+| T5-base | 2.06 | 2.0 | 1.83 | 2.65 |
+
 -----------------------
 
 These are naïve baselines that are meant to provide a starting point for investigation. We look forward to seeing how you will improve upon these!
