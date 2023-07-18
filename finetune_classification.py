@@ -27,7 +27,7 @@ import evaluate
 import datasets
 import numpy as np
 from datasets import load_dataset
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, matthews_corrcoef
 
 import transformers
 from transformers import (
@@ -592,7 +592,8 @@ def main():
             return {"mse": ((preds - p.label_ids) ** 2).mean().item()}
         elif is_binary:
             return {"accuracy": (preds == p.label_ids).astype(np.float32).mean().item(),
-                    "f1": f1_score(y_true=p.label_ids, y_pred=preds, average="binary")}
+                    "f1": f1_score(y_true=p.label_ids, y_pred=preds, average="binary"),
+                    "mcc": matthews_corrcoef(y_true=p.label_ids, y_pred=preds)}
         else:
             return {"accuracy": (preds == p.label_ids).astype(np.float32).mean().item()}
 
