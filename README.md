@@ -237,9 +237,10 @@ Please also cite the lm-eval-harness paper:
 
 Please cite the following if you choose to include the Age-of-acquisition prediction evaluation:
 ```
-@manuscript{portelance2023predicting,
+@article{portelance2023predicting,
     author = {Portelance, Eva and Duan, Yuguang and Frank, Michael C. and Lupyan, Gary},
     title = {Predicting age of acquisition for children’s early vocabulary in five languages using language model surprisal},
-    year = {2023},
+    year = {To Appear},
+    journal = {Cognitive Science},
     url = {https://github.com/evaportelance/multilingual-aoa-prediction}
     }
