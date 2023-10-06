@@ -664,6 +664,8 @@ def main():
             combined = {}
 
         for eval_dataset, task in zip(eval_datasets, tasks):
+            if "condition" in non_label_column_names:
+                eval_dataset = eval_dataset.filter(lambda example: example["condition"] == "test")
             metrics = trainer.evaluate(eval_dataset=eval_dataset)
 
             max_eval_samples = (
