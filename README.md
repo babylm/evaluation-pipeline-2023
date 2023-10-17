@@ -101,38 +101,38 @@ We provide a series of baseline models that we train on our strict or strict-sma
 
 We simply take the hyperparameters used to pre-train the original versions of these models, and train them on our strict or strict-small datasets. While we do reduce the context length and, in some cases, the batch size, these are otherwise minimally modified.
 
-Here are baseline scores. These are all accuracies, unless otherwise noted by (F1), where we use macro-F1. Random chance accuracy on all BLiMP tasks is 50.
+Here are baseline scores. Metrics are marked for each task. For (Super)GLUE, tasks use accuracies unless otherwise marked (in parentheses) by the subtask name. F1 denoates macro-F1, and MCC denotes Matthew's correlation coefficient. Random chance accuracy on all BLiMP tasks is 50.
 
 **Strict-small Track**
 
-*BLiMP*
+*BLiMP* (Acc.)
 | Model | Anaphor Agr. | Agr. Structure | Binding | Control/Raising | D-N Agr. | Ellipsis | Filler-Gap | Irregular Forms | Island Effects | NPI Licensing | Quantifiers | S-V Agr. |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | OPT-125m | 63.8 | 70.6 | 67.1 | 66.5 | 78.5 | 62 | 63.8 | 67.5 | 48.6 | 46.7 | 59.6 | 56.9 |
 | RoBERTa-base | 81.5 | 67.1 | 67.3 | 67.9 | 90.8 | 76.4 | 63.5 | 87.4 | 39.9 | 55.9 | 70.5 | 65.4 |
 | T5-base | 68.9 | 63.8 | 60.4 | 60.9 | 72.2 | 34.4 | 48.2 | 77.6 | 45.6 | 47.8 | 61.2 | 65.0 |
 
-*BLiMP Supplement*
+*BLiMP Supplement* (Acc.)
 | Model | Hypernym | QA Congruence (easy) | QA Congruence (tricky) | Subj.-Aux. Inversion | Turn Taking |
 | --- | --- | --- | --- | --- | --- |
 | OPT-125m | 50.0 | 54.7 | 31.5 | 80.3 | 57.1 |
 | RoBERTa-base | 49.4 | 31.3 | 32.1 | 71.7 | 53.2 |
 | T5-base | 48.0 | 40.6 | 21.2 | 64.9 | 45.0 |
 
-*(Super)GLUE*
-| Model | CoLA | SST-2 | MRPC (F1) | QQP (F1) | MNLI | MNLI-mm | QNLI | RTE | BoolQ | MultiRC | WSC |
+*(Super)GLUE* (Default: Acc.)
+| Model | CoLA (MCC) | SST-2 | MRPC (F1) | QQP (F1) | MNLI | MNLI-mm | QNLI | RTE | BoolQ | MultiRC | WSC |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | *Majority label* | *69.5* | *50.2* | *82* | *53.1* | *35.7* | *35.7* | *35.4* | *53.1* | *50.5* | *59.9* | *53.2* | *61.4* |
-| OPT-125m | 64.6 | 81.9 | 72.5 | 60.4 | 57.6 | 60.0 | 61.5 | 60.0 | 63.3 | 55.2 | 60.2 |
-| RoBERTa-base | 70.8 | 87.0 | 79.2 | 73.7 | 73.2 | 74.0 | 77.0 | 61.6 | 66.3 | 61.4 | 61.4 |
-| T5-base | 61.2 | 78.1 | 80.5 | 66.2 | 48.0 | 50.3 | 62.0 | 49.4 | 66.0 | 47.1 | 61.4 |
+| OPT-125m | 15.0 | 81.9 | 72.5 | 60.4 | 57.6 | 60.0 | 61.5 | 60.0 | 63.3 | 55.2 | 60.2 |
+| RoBERTa-base | 26 | 87.0 | 79.2 | 73.7 | 73.2 | 74.0 | 77.0 | 61.6 | 66.3 | 61.4 | 61.4 |
+| T5-base | 11 | 78.1 | 80.5 | 66.2 | 48.0 | 50.3 | 62.0 | 49.4 | 66.0 | 47.1 | 61.4 |
 
-*MSGS*
+*MSGS* (MCC)
 | Model | CR (Control) | LC (Control) | MV (Control) | RP (Control) | SC (Control) | CR_LC | CR_RTP | MV_LC | MV_RTP | SC_LC | SC_RP |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| OPT-125m | 86.4 | 86.1 | 99.8 | 100.0 | 94.3 | 66.5 | 67.0 | 66.5 | 67.6 | 80.2 | 67.5 |
-| RoBERTa-base | 84.1 | 100.0 | 99.4 | 93.5 | 96.4 | 67.7 | 68.6 | 66.7 | 68.6 | 84.2 | 65.7 | 
-| T5-base | 78.4 | 100.0 | 72.7 | 95.5 | 94.4 | 66.7 | 69.7 | 66.6 | 66.9 | 73.6 | 67.8 |
+| OPT-125m | 51 | 54 | 99 | 100 | 77 | 0 | -70 | -72 | -78 | 14 | -69 |
+| RoBERTa-base | 43 | 100 | 98 | 77 | 86 | -28 | -78 | -99 | -79 | 16 | -45 |
+| T5-base | 21 | 100 | 33 | 83 | 78 | -78 | -62 | -100 | -80 | -25 | -39 |
 
 *Age-of-acquisition Prediction*
 (Mean absolute deviation in months across LOO cross-validation folds)
@@ -146,34 +146,34 @@ Here are baseline scores. These are all accuracies, unless otherwise noted by (F
 
 **Strict Track**
 
-*BLiMP*
+*BLiMP* (Acc.)
 | Model | Anaphor Agr. | Agr. Structure | Binding | Control/Raising | D-N Agr. | Ellipsis | Filler-Gap | Irregular Forms | Island Effects | NPI Licensing | Quantifiers | S-V Agr. |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | OPT-125m | 94.9 | 73.8 | 73.8 | 72.2 | 93.1 | 80.5 | 73.6 | 80.8 | 57.8 | 51.6 | 74.5 | 77.3 |
 | RoBERTa-base | 89.5 | 71.3 | 71 | 67.1 | 93.1 | 83.8 | 68.0 | 89.6 | 54.5 | 66.3 | 70.3 | 76.2 |
 | T5-base | 66.7 | 61.2 | 59.4 | 59.8 | 53.8 | 49.1 | 70.0 | 75.5 | 43.6 | 45.6 | 34.2 | 53.2 |
 
-*BLiMP Supplement*
+*BLiMP Supplement* (Acc.)
 | Model | Hypernym | QA Congruence (easy) | QA Congruence (tricky) | Subj.-Aux. Inversion | Turn Taking |
 | --- | --- | --- | --- | --- | --- |
 | OPT-125m | 46.3 | 76.5 | 47.9 | 85.3 | 82.9 |
 | RoBERTa-base | 50.8 | 34.4 | 34.5 | 45.6 | 46.8 |
 | T5-base | 51.1 | 45.3 | 25.5 | 69.2 | 48.9 |
 
-*(Super)GLUE*
-| Model | CoLA | SST-2 | MRPC (F1) | QQP (F1) | MNLI | MNLI-mm | QNLI | RTE | BoolQ | MultiRC | WSC |
+*(Super)GLUE* (Default: Acc.)
+| Model | CoLA (MCC) | SST-2 | MRPC (F1) | QQP (F1) | MNLI | MNLI-mm | QNLI | RTE | BoolQ | MultiRC | WSC |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | *Majority label* | *69.5* | *50.2* | *82* | *53.1* | *35.7* | *35.7* | *35.4* | *53.1* | *50.5* | *59.9* | *53.2* | *61.4* |
-| OPT-125m | 73.7 | 86.6 | 82.1 | 77.8 | 70.1 | 71.9 | 80.1 | 67.7 | 66.0 | 61.1 | 59.0 |
-| RoBERTa-base | 75.9 | 88.6 | 80.5 | 78.5 | 68.7 | 78.0 | 82.3 | 51.5 | 59.9 | 61.3 | 61.4 |
-| T5-base | 76.3 | 88.0 | 85.9 | 79.7 | 71.5 | 74.0 | 83.1 | 60.6 | 69.0 | 62.4 | 60.2 |
+| OPT-125m | 36 | 86.6 | 82.1 | 77.8 | 70.1 | 71.9 | 80.1 | 67.7 | 66.0 | 61.1 | 59.0 |
+| RoBERTa-base | 45 | 88.6 | 80.5 | 78.5 | 68.7 | 78.0 | 82.3 | 51.5 | 59.9 | 61.3 | 61.4 |
+| T5-base | 37 | 88.0 | 85.9 | 79.7 | 71.5 | 74.0 | 83.1 | 60.6 | 69.0 | 62.4 | 60.2 |
 
-*MSGS*
+*MSGS* (MCC)
 | Model | CR (Control) | LC (Control) | MV (Control) | RP (Control) | SC (Control) | CR_LC | CR_RTP | MV_LC | MV_RTP | SC_LC | SC_RP |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| OPT-125m | 97.2 | 82.6 | 100.0 | 99.8 | 88.1 | 75.3 | 67.1 | 66.3 | 66.8 | 84.8 | 62.0 | 
-| RoBERTa-base | 93.0 | 100.0 | 100.0 | 100.0 | 89.0 | 68.3 | 66.8 | 66.6 | 80.2 | 67.4 | 67.4 | 
-| T5-base | 95.1 | 100.0 | 100.0 | 99.8 | 88.7 | 76.7 | 69.4 | 67.0 | 67.7 | 72.7 | 68.0 |
+| OPT-125m | 89 | 42 | 100 | 99 | 52 | 35 | -70 | -76 | -100 | 35 | -60 |
+| RoBERTa-base | 75 | 100 | 100 | 100 | 59 | -89 | -91 | -100 | -15 | -58 | -39 |
+| T5-base | 81 | 100 | 100 | 99 | 56 | -1 | -71 | -98 | -94 | -32 | -65 |
 
 *Age-of-acquisition Prediction*
 (Mean absolute deviation in months across LOO cross-validation folds)
